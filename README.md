@@ -1,4 +1,4 @@
-# Simple TodoList
+# mini-SNS
 
 ### Project
 
