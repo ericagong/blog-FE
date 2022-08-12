@@ -1,70 +1,73 @@
-# Getting Started with Create React App
+# Simple TodoList
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Project
 
-## Available Scripts
+TODO : 영상 교체하기
+![TodoList Preview](https://user-images.githubusercontent.com/48196721/182003615-edcd0f87-bfae-4f4a-a649-59691da6dea7.gif)
 
-In the project directory, you can run:
+### Tech Stack
 
-### `npm start`
+- EC2
+- RTK
+- axios
+- json-server
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Structure Description
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+TODO : structure 바꾸기
 
-### `npm test`
+#### Pages
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Home :
+  - Main page with todoList view, where user can **create, read, update(toggle `isDone`), delete** each todo.
+  - If user clicks `detail` link of each todo, redirects to `/about/:todo_id` page.
+- About :
+  - Detail page of each todo, where user can **read todo id, title, contents**.
+  - If user clicks `Go Back` button, redirects to previous page.
+- Not Found :
+  - 404 Not Found page for wrong urls.
 
-### `npm run build`
+#### Components
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Layout : Layout for Home view.
+- Header : Header, which contains information about project subject and programmed language.
+- Form : Form to create new todo.
+  - Form consists of two input fields(**title and contents**) and one `Submit` button.
+  - If user skipped to fill one of two inputs, `Submit button` disabled.
+  - If user typed both fields and clicked `Submit` button, new todo created to store.
+- TodoList : TodoList view.
+  - It has two categories of todoList.(**Working and Done**)
+  - Working shows todos whose state `isDone : false`.
+  - Done shows todos whose staet `isDone : true`
+- List : List contains of set of todos.
+- Todo : Todo shows **todo's title, contents and call to action buttons**.
+  - If title or contents is too long, summarized each with `...` .
+  - If user clicks `Done` or `Delete` button, todo's isDone state toggles.
+  - If user clicks `Delete` button, that todo deletes from store.
+  - If user clicks `Detail` link, it redirects to `/about/:todo_id` page.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### Redux
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- todos : `todos module` contains `ACTION`, `ACTION CREATOR`, `INITIAL STATE`, `REDUCER` related to **CRUD of todoList**.
+- configureStore : create root store with `todos module`.
 
-### `npm run eject`
+### Updated Details
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- [x] Refactoring codes
+- [x] Change css files to styled-components
+- [x] Add max-width, min-width for each page, align items on center of the page
+- [x] Check redux is pure function
+- [x] Disable `Submit` button if two inputs are not validated
+- [x] Route with react-router-dom (v6)
+- [x] Summarize title and contents of todo in Home page if it is too long
+- [x] use reducer spread ...state
+- [x] onClick(e) => delete(e.target.value)
+- [x] div wrapper -> <></>
+- [x] Submit form with eneter
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Need to update following Details
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [ ] Change createSotre to configureStore from redux-toolkit
+- [ ] Try nanoid package
+- [ ] Try immer library
+- [ ] logger devtools
