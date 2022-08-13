@@ -4,7 +4,7 @@ import { faHome } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 
 import { H2 } from "../styled/Hn";
-import Button from "./Button";
+import Button from "../../elements/Button";
 
 const Header = (props) => {
   const navigate = useNavigate();

@@ -1,6 +1,6 @@
 import Layout from "../components/styled/Layout";
 import { H1 } from "../components/styled/Hn";
-import Header from "../components/elements/Header";
+import Header from "../components/common/Header";
 
 const Home = (props) => {
   return (
