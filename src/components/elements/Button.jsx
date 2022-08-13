@@ -20,6 +20,7 @@ const Icon = styled(FontAwesomeIcon)`
   &:hover {
     cursor: pointer;
     color: ${(props) => props.theme.hoverIconColor};
+    transition: ${(props) => props.theme.transition};
     transform: ${(props) => props.theme.hoverTransform};
   }
 `;

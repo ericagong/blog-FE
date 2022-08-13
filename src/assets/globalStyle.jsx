@@ -24,5 +24,5 @@ export const lightTheme = {
   boxRadius: "5px",
 
   // transition
-  tarnsition: "all 0.3s",
+  transition: "all 0.3s",
 };
