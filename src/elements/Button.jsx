@@ -2,11 +2,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 
 // TODO null visibility: none 차이
-const Button = ({ content, icon, size, onClick }) => {
+const Button = ({ type, content, icon, size, onClick }) => {
   return (
     <Wrapper onClick={onClick}>
       {icon ? <Icon icon={icon} size={size} /> : null}
-      {content ? <Btn>{content}</Btn> : null}
+      {content ? <Btn type={type}>{content}</Btn> : null}
     </Wrapper>
   );
 };
@@ -25,7 +25,7 @@ const Icon = styled(FontAwesomeIcon)`
   }
 `;
 
-const Btn = styled.button`
+const Btn = styled.button.attrs((props) => ({ type: props.type }))`
   padding: 10px 20px;
   margin: 5px;
   border-radius: ${(props) => props.theme.buttonRadius};
