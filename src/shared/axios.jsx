@@ -1,46 +1,54 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://3.34.140.51",
+  baseURL: "http://localhost:3000",
   headers: {
-    "content-type": "application/json;charset=UTF-8",
+    "content-type": "application/json; charset=UTF-8",
     accept: "application/json,",
   },
 });
 
+// TODO login, signup, nicknamecheck, idcheck에는 안들어가게 처리해야하나?
+// 3가지 방법 중 실무에서는 무엇 사용?
 api.interceptors.request.use(function (config) {
-  const accessToken = document.cookie.split("=")[1];
-  config.headers.common["X-AUTH-TOKEN"] = `${accessToken}`;
+  // TODO parsing 로직 다시 짜기
+  // const accessToken = document.cookie.split("=")[1];
+  // const refreshToken = document.cookie.split("=")[1];
+  // config.headers.common["Authentication"] = `${accessToken}`;
+  // config.headers.common["RefreshToken"] = `${refreshToken}`;
   return config;
 });
 
+// TODO question: apis 하나로 관리하는게 나은지, 아니면 각각 모듈 기능별로 분리하는게 좋은지?
 export const apis = {
-  // article
-  add: (contents) => api.post("/api/articles", contents),
-  edit: (id, contents) => api.put(`api/articles/${id}`, contents),
-  del: (id) => api.delete(`api/articles/${id}`),
-  articles: () => api.get("/api/articles"),
-  article: (id) => api.get(`/api/articles/${id}`),
-  search: (value) => api.get(`/api/articles/search?query=${value}`),
+  // user
+  login: (username, password) =>
+    api.post("/user/login", { username, password }),
+  signup: (username, nickname, password, passwordCheck) =>
+    api.post("/user/signup", {
+      username,
+      nickname,
+      password,
+      passwordCheck,
+    }),
+  // TODO logout이 서버측에서 필요한 이유? 뭔가 처리 해주는지? 프론트에서도 만료 가능. 이중이 될 듯..
+  logout: () => api.get("/user/logout"),
+  idCheck: (username) => api.post("/user/username", { username }),
+  nicknameCheck: (nickname) => api.post("/user/nickname", { nickname }),
+
+  // post
+  // add: (contents) => api.post("/api/articles", contents),
+  // edit: (id, contents) => api.put(`api/articles/${id}`, contents),
+  // del: (id) => api.delete(`api/articles/${id}`),
+  // articles: () => api.get("/api/articles"),
+  // article: (id) => api.get(`/api/articles/${id}`),
+  // search: (value) => api.get(`/api/articles/search?query=${value}`),
 
   // comment
-  addComment: (id, content) =>
-    api.post(`/api/articles/${id}/comments`, { content }),
-  comments: (id) => api.get(`/api/articles/${id}/comments`),
-  delComment: (id, coId) => api.delete(`/api/articles/${id}/comments/${coId}`),
-  editComment: (id, coId, content) =>
-    api.put(`/api/articles/${id}/comments/${coId}`, { content }),
-
-  // user
-  login: (id, pw) => api.post("/user/login", { username: id, password: pw }),
-  signup: (id, email, pw, pwcheck) =>
-    api.post("/user/signup", {
-      username: id,
-      email: email,
-      password: pw,
-      repassword: pwcheck,
-    }),
-  userInfo: () => api.get(`/myinfo`),
-  userPassword: (pw) => api.post(`/myinfo`, pw),
-  userNewPassword: (pw) => api.put(`/myinfo`, pw),
+  // addComment: (id, content) =>
+  //   api.post(`/api/articles/${id}/comments`, { content }),
+  // comments: (id) => api.get(`/api/articles/${id}/comments`),
+  // delComment: (id, coId) => api.delete(`/api/articles/${id}/comments/${coId}`),
+  // editComment: (id, coId, content) =>
+  //   api.put(`/api/articles/${id}/comments/${coId}`, { content }),
 };

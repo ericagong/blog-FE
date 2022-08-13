@@ -1,10 +1,13 @@
+import Layout from "../../components/user/LoginLayout";
+import Header from "../../components/common/Header";
+import LoginLayout from "../../components/user/LoginLayout";
+
 const Login = (props) => {
   return (
-    <>Login</>
-    // <Layout>
-    // 	<Header />
-    // 	<LoginLayout/>
-    // </Layout>
+    <Layout>
+      <Header />
+      <LoginLayout />
+    </Layout>
   );
 };
 

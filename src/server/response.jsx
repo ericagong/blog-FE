@@ -1,55 +1,107 @@
 // response.js
+
 export const RESP = {
-  POSTS: {
+  // for user realted APIs
+  LOGIN_HEADER: {
+    Authorization:
+      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsYXN0bWFuIiwiYXV0aCI6IlJPTEVfTUVNQkVSIiwiZXhwIjoxNjYwMzc0NzYwfQ.md7GkryurbgmfFIjaJtvQEoOm6HqQWCCVrK2FzSqUMc",
+    RefreshToken:
+      "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NjA5Nzc3NjB9.sLdXvDFyE_YFyUr_rkX9LBPJSFWnyGQv39p0tkE2xD0",
+  },
+  LOGIN_SUCCESS: {
     result: true,
-    messsage: "ok",
-  },
-  HOTDEALS: {
-    ok: true,
-    result: [
-      {
-        name: "모나미 3000 플러스펜 낱개",
-        price: 200,
-        brand: "오피스존",
-        mall: "이마트몰",
-      },
-    ],
-  },
-  LOGIN: {
-    ok: true,
-    result: {
-      user: {
-        token: "eyJ0eXAi...",
-        name: "김항해",
-      },
+    data: {
+      id: 1,
+      username: "ericagong",
+      nickname: "helllo_world",
+      createdAt: "2022-08-13T15:42:37.493339",
+      modifiedAt: "2022-08-13T15:42:37.493339",
+    },
+    status: {
+      code: 200,
+      message: "successfullly logged in.",
     },
   },
-  ITEM_DETAIL: {
-    ok: true,
-    result: {
-      price: 200,
-      name: "",
-      sections: {
-        detail: {
-          modelNo: "1000032249707",
-        },
-        imgs: [
-          "http://gi.esmplus.com/dodomae/NAR/Monami/pluspen3000.jpg",
-          "http://ai.esmplus.com/officetop/PIL.jpg",
-        ],
-        requireds: {
-          modelName: "3000 플러스펜 낱개",
-        },
-        reviews: [
-          {
-            star: 5,
-            comment: "필기감이 좋고 가성비 최고",
-            item: "[구매옵션] 색상: 보라색",
-            userid: "jgs*******",
-            createdAt: "2021-03-31T19:01:56.791388+09:00",
-          },
-        ],
-      },
+  LOGIN_FAIL: {
+    result: false,
+    data: null,
+    status: {
+      code: 400,
+      message: "login failed.",
     },
   },
+  LOGOUT_SUCCESS: {
+    result: true,
+    data: null,
+    status: {
+      code: 200,
+      message: "successfullly logged out.",
+    },
+  },
+  LOGOUT_FAIL: {
+    result: false,
+    data: null,
+    status: {
+      code: 400,
+      message: "logout failed.",
+    },
+  },
+  ID_CHECK_SUCCESS: {
+    result: true,
+    data: true,
+    status: {
+      code: 200,
+      message: "You can use this ID.",
+    },
+  },
+  ID_CHECK_FAIL: {
+    result: false,
+    data: null,
+    status: {
+      code: 400,
+      message: "This ID is already exist. Please try other ID.",
+    },
+  },
+  NICKNAME_CHECK_SUCCESS: {
+    result: true,
+    data: true,
+    status: {
+      code: 200,
+      message: "You can use this nickname.",
+    },
+  },
+  NICKNAME_CHECK_FAIL: {
+    result: false,
+    data: null,
+    status: {
+      code: 400,
+      message: "This nickname is already exist. Please try other nickname.",
+    },
+  },
+  SIGN_UP_SUCCESS: {
+    result: true,
+    data: {
+      id: 1,
+      username: "ericagong",
+      nickname: "helllo_world",
+      createdAt: "2022-08-13T15:42:37.493339",
+      modifiedAt: "2022-08-13T15:42:37.493339",
+    },
+    status: {
+      code: 200,
+      message: "successfully signed in.",
+    },
+  },
+  SIGN_UP_FAIL: {
+    result: false,
+    data: null,
+    status: {
+      code: 400,
+      message: "sigin failed.",
+    },
+  },
+
+  // for post realted APIs
+
+  // for comment realted APIs
 };
