@@ -12,18 +12,19 @@ export const RESP = {
     result: true,
     data: {
       id: 1,
-      nickname: "ericagong",
+      username: "ericagong",
+      nickname: "helllo_world",
       createdAt: "2022-08-13T15:42:37.493339",
       modifiedAt: "2022-08-13T15:42:37.493339",
     },
     status: {
       code: 200,
-      data: null,
       message: "successfullly logged in.",
     },
   },
   LOGIN_FAIL: {
     result: false,
+    data: null,
     status: {
       code: 400,
       message: "login failed.",
@@ -31,6 +32,7 @@ export const RESP = {
   },
   LOGOUT_SUCCESS: {
     result: true,
+    data: null,
     status: {
       code: 200,
       message: "successfullly logged out.",
@@ -38,6 +40,7 @@ export const RESP = {
   },
   LOGOUT_FAIL: {
     result: false,
+    data: null,
     status: {
       code: 400,
       message: "logout failed.",
@@ -45,6 +48,7 @@ export const RESP = {
   },
   ID_CHECK_SUCCESS: {
     result: true,
+    data: true,
     status: {
       code: 200,
       message: "You can use this ID.",
@@ -52,6 +56,7 @@ export const RESP = {
   },
   ID_CHECK_FAIL: {
     result: false,
+    data: null,
     status: {
       code: 400,
       message: "This ID is already exist. Please try other ID.",
@@ -59,6 +64,7 @@ export const RESP = {
   },
   NICKNAME_CHECK_SUCCESS: {
     result: true,
+    data: true,
     status: {
       code: 200,
       message: "You can use this nickname.",
@@ -66,6 +72,7 @@ export const RESP = {
   },
   NICKNAME_CHECK_FAIL: {
     result: false,
+    data: null,
     status: {
       code: 400,
       message: "This nickname is already exist. Please try other nickname.",
@@ -73,6 +80,13 @@ export const RESP = {
   },
   SIGN_UP_SUCCESS: {
     result: true,
+    data: {
+      id: 1,
+      username: "ericagong",
+      nickname: "helllo_world",
+      createdAt: "2022-08-13T15:42:37.493339",
+      modifiedAt: "2022-08-13T15:42:37.493339",
+    },
     status: {
       code: 200,
       message: "successfully signed in.",
@@ -80,6 +94,7 @@ export const RESP = {
   },
   SIGN_UP_FAIL: {
     result: false,
+    data: null,
     status: {
       code: 400,
       message: "sigin failed.",
