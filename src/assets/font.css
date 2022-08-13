@@ -1,0 +1,7 @@
+/* TODO css 파일 분리 or index.html 바로 적용 */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Sans:wght@300;400;500&display=swap");
+
+body {
+  font-family: "Noto Sans", sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
+}
