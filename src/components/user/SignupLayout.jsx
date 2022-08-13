@@ -1,5 +1,11 @@
+import Signup from "./Signup";
+
 const SignupLayout = (props) => {
-  return <>Signup Layout</>;
+  return (
+    <>
+      <Signup />
+    </>
+  );
 };
 
 export default SignupLayout;
