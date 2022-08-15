@@ -1,6 +1,6 @@
 // response.js
 
-export const RESP = {
+const RESP = {
   // for user realted APIs
   LOGIN_HEADER: {
     Authorization:
@@ -105,3 +105,5 @@ export const RESP = {
 
   // for comment realted APIs
 };
+
+export default RESP;
