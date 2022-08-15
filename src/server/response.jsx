@@ -265,6 +265,14 @@ const RESP = {
       message: "successfully edit the post.",
     },
   },
+  GET_POSTS_FAIL: {
+    result: false,
+    data: null,
+    status: {
+      code: 400,
+      message: "failed to get posts.",
+    },
+  },
   GET_POST_SUCCESS: {
     result: true,
     data: {
@@ -342,7 +350,7 @@ const RESP = {
       ],
     },
   },
-  GET_POSTS_FAIL: {
+  GET_POST_FAIL: {
     result: false,
     data: null,
     status: {

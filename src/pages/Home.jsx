@@ -1,14 +1,12 @@
 import Layout from "../components/styled/Layout";
-import { H1 } from "../components/styled/Hn";
 import Header from "../components/common/Header";
+import HomeLayout from "../components/post/HomeLayout";
 
 const Home = (props) => {
   return (
     <Layout>
       <Header />
-      <H1>home</H1>
-
-      {/* <HomeLayout/> */}
+      <HomeLayout />
     </Layout>
   );
 };
