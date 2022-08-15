@@ -249,11 +249,9 @@ const Signup = (props) => {
 export default Signup;
 
 const Form = styled.form`
-  width: 80%;
+  width: 70%;
   height: 100%;
   margin: auto;
-  padding: 50px;
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
