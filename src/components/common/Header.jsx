@@ -18,7 +18,6 @@ const Header = (props) => {
   };
 
   const logoutHandler = () => {
-    console.log("logged out!");
     dispatch(logout());
     localStorage.removeItem("AccessToken");
     localStorage.removeItem("RefreshToken");
