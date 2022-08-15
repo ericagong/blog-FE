@@ -13,6 +13,7 @@ import axios from "axios";
 
 // TODO 유효성겁사 프론트단? 백단?
 // TODO FE encoding?
+// TODO check validate!
 const Signup = (props) => {
   const [userInfo, setUserInfo] = useState({
     username: "",
@@ -91,24 +92,24 @@ const Signup = (props) => {
 
   const submitHandler = async (formData) => {
     console.log(formData);
-    const resp = axios.post(`http://3.34.47.86/user/signup`, formData);
-    console.log(resp);
-    // const {
-    //   result,
-    //   data,
-    //   status: { message },
-    // } = RESP.SIGN_UP_SUCCESS;
-    // alert(message);
-    // if (result) {
-    //   navigate("/login");
-    // }
+    // const resp = axios.post(`http://3.34.47.86/user/signup`, formData);
+    // console.log(resp);
+    const {
+      result,
+      data,
+      status: { message },
+    } = RESP.SIGN_UP_SUCCESS;
+    alert(message);
+    if (result) {
+      navigate("/login");
+    }
   };
 
   return (
     <Form onSubmit={handleSubmit(submitHandler)}>
       <HelperWrapper>
         <H3 as='label' htmlFor='username'>
-          ID
+          id
         </H3>
         <H4>Use 8 to 16 characters with a mix of letters, numbers.</H4>
       </HelperWrapper>
@@ -122,7 +123,7 @@ const Signup = (props) => {
               message:
                 "ID should be 8 to 16 characters with a mix of letters, numbers.",
             },
-            valusernameate: {
+            validate: {
               noWhiteSpace: (v) =>
                 !/[\s]/g.test(v) || "ID cannot contain space.",
             },
@@ -161,7 +162,7 @@ const Signup = (props) => {
               message:
                 "Nickname should be 2 to 8 characters with a mix of letters(English or Korean), numbers.",
             },
-            valusernameate: {
+            validate: {
               noWhiteSpace: (v) =>
                 !/[\s]/g.test(v) || "Nickname cannot contain space.",
             },
@@ -200,7 +201,7 @@ const Signup = (props) => {
               message:
                 "Password should be 2 to 8 characters with a mix of letters, numbers and special characters.",
             },
-            valusernameate: {
+            validate: {
               noWhiteSpace: (v) =>
                 !/[\s]/g.test(v) || "Nickname cannot contain space.",
               mixOfTwo: (v) => {

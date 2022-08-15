@@ -1,10 +1,13 @@
+import Layout from "../../components/styled/Layout";
+import Header from "../../components/common/Header";
+import CreateLayout from "../../components/post/CreateLayout";
+
 const Create = (props) => {
   return (
-    <>Create</>
-    // <Layout>
-    // 	<Header />
-    // 	<CreateLayout/>
-    // </Layout>
+    <Layout>
+      <Header />
+      <CreateLayout />
+    </Layout>
   );
 };
 
