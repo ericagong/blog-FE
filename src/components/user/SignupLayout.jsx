@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
 
-import styled from "styled-components";
-
-import Signup from "./Signup";
+import { Wrapper } from "../styled/User";
 import { H1 } from "../styled/Hn";
+import Signup from "./Signup";
 
 const SignupLayout = (props) => {
   return (
@@ -18,12 +17,3 @@ const SignupLayout = (props) => {
 };
 
 export default SignupLayout;
-
-const Wrapper = styled.div`
-  width: 70%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-sizing: border-box;
-  padding: 50px 0px;
-`;

@@ -1,12 +1,16 @@
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 
+import { logout } from "../../modules/redux/user";
 import { H2 } from "../styled/Hn";
 import Button from "../../elements/Button";
 
 const Header = (props) => {
+  const isLogin = useSelector((state) => state.user.isLogin);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const onClickHandler = (path) => {
@@ -15,9 +19,10 @@ const Header = (props) => {
 
   const logoutHandler = () => {
     console.log("logged out!");
+    dispatch(logout());
+    localStorage.removeItem("AccessToken");
+    localStorage.removeItem("RefreshToken");
   };
-
-  const isLogin = true;
 
   // TODO 로그인 여부에 따라 분기처리
   return (
