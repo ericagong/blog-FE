@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
+
+import { Form } from "../styled/User";
 import { H3, H4, H4_ERR, H4_SUC } from "../styled/Hn";
 import Button from "../../elements/Button";
 
@@ -247,18 +249,6 @@ const Signup = (props) => {
 };
 
 export default Signup;
-
-const Form = styled.form`
-  width: 80%;
-  height: 100%;
-  margin: auto;
-  padding: 50px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  align-items: flex-start;
-`;
 
 const HelperWrapper = styled.div`
   display: flex;
