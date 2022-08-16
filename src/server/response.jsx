@@ -287,70 +287,6 @@ const RESP = {
       content: "Vestibulum ac est lacinia nisi venenatis tristique.",
       modifiedAt: "2020-04-09T19:12:30.686",
       isMine: true,
-      comments: [
-        {
-          id: 1,
-          nickname: "Lina",
-          content: "Nunc rhoncus dui vel sem.",
-          isMine: false,
-        },
-        {
-          id: 2,
-          nickname: "Amabel",
-          content: "Fusce consequat.",
-          isMine: false,
-        },
-        {
-          id: 3,
-          nickname: "Natale",
-          content: "Suspendisse accumsan tortor quis turpis.",
-          isMine: true,
-        },
-        {
-          id: 4,
-          nickname: "Neville",
-          content: "Quisque ut erat.",
-          isMine: true,
-        },
-        {
-          id: 5,
-          nickname: "Abie",
-          content: "Pellentesque eget nunc.",
-          isMine: false,
-        },
-        {
-          id: 6,
-          nickname: "Tricia",
-          content: "Curabitur convallis.",
-          isMine: false,
-        },
-        {
-          id: 7,
-          nickname: "Erinn",
-          content:
-            "Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue.",
-          isMine: false,
-        },
-        {
-          id: 8,
-          nickname: "Flory",
-          content:
-            "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi.",
-          isMine: false,
-        },
-        {
-          id: 9,
-          nickname: "Ferd",
-          content: "Proin interdum mauris non ligula pellentesque ultrices.",
-          isMine: true,
-        },
-        {
-          id: 10,
-          nickname: "Edyth",
-          content: "Integer non velit.",
-          isMine: true,
-        },
-      ],
     },
   },
   GET_POST_FAIL: {
@@ -359,6 +295,84 @@ const RESP = {
     status: {
       code: 400,
       message: "failed to get post.",
+    },
+  },
+  GET_COMMENTS_SUCCESS: {
+    result: true,
+    data: [
+      {
+        id: 1,
+        nickname: "Lina",
+        content: "Nunc rhoncus dui vel sem.",
+        isMine: false,
+      },
+      {
+        id: 2,
+        nickname: "Amabel",
+        content: "Fusce consequat.",
+        isMine: false,
+      },
+      {
+        id: 3,
+        nickname: "Natale",
+        content: "Suspendisse accumsan tortor quis turpis.",
+        isMine: true,
+      },
+      {
+        id: 4,
+        nickname: "Neville",
+        content: "Quisque ut erat.",
+        isMine: true,
+      },
+      {
+        id: 5,
+        nickname: "Abie",
+        content: "Pellentesque eget nunc.",
+        isMine: false,
+      },
+      {
+        id: 6,
+        nickname: "Tricia",
+        content: "Curabitur convallis.",
+        isMine: false,
+      },
+      {
+        id: 7,
+        nickname: "Erinn",
+        content:
+          "Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue.",
+        isMine: false,
+      },
+      {
+        id: 8,
+        nickname: "Flory",
+        content:
+          "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi.",
+        isMine: false,
+      },
+      {
+        id: 9,
+        nickname: "Ferd",
+        content: "Proin interdum mauris non ligula pellentesque ultrices.",
+        isMine: true,
+      },
+      {
+        id: 10,
+        nickname: "Edyth",
+        content: "Integer non velit.",
+        isMine: true,
+      },
+    ],
+    status: {
+      code: 200,
+      message: "comments successfully loaded.",
+    },
+  },
+  GET_COMMENTS_FAIL: {
+    result: false,
+    status: {
+      code: 400,
+      message: "failed to get comments.",
     },
   },
 
