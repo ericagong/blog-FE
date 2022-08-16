@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import { Form } from "../styled/User";
-import { H3, H3_BOLD, H4, H4_ERR } from "../styled/Hn";
+import { H3, H3_BOLD, H4_ERR } from "../styled/Hn";
 import ImageView from "./ImageView";
 import Button from "../../elements/Button";
 

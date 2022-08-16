@@ -8,11 +8,11 @@ import RESP from "../../server/response";
 // import axios from 'axios';
 import { login } from "../../modules/redux/user";
 
-import { Form } from "../styled/User";
 import { H3, H4_ERR } from "../styled/Hn";
 import Button from "../../elements/Button";
 
 // TODO id 저장하시겠습니까? 로컬 스토리지 저장하고 그렇지 않은 경우는 쿠키 저장?
+// TODO 아이디 및 패스워드 유효성 검사?
 const Login = (props) => {
   const {
     register,
@@ -58,26 +58,38 @@ const Login = (props) => {
       <H3 as='label' htmlFor='username'>
         ID
       </H3>
-      <Input
-        {...register("username", {
-          required: "You should write ID for login.",
-        })}
-        type='text'
-        onChange={onChangeHandler}
-      />
-      {errors?.id ? <H4_ERR>{errors.id.message}</H4_ERR> : null}
+      <InputWrapper>
+        <Input
+          {...register("username", {
+            required: "You should write ID for login.",
+          })}
+          type='text'
+          onChange={onChangeHandler}
+        />
+      </InputWrapper>
+      {errors?.username ? (
+        <ErrorWrapper>
+          <H4_ERR>{errors.username.message}</H4_ERR>
+        </ErrorWrapper>
+      ) : null}
       <H3 as='label' htmlFor='password'>
         Password
       </H3>
-      <Input
-        {...register("password", {
-          required: "You should write password for login.",
-        })}
-        type='password'
-        id='password'
-        onChange={onChangeHandler}
-      />
-      {errors?.id ? <H4_ERR>{errors.id.message}</H4_ERR> : null}
+      <InputWrapper>
+        <Input
+          {...register("password", {
+            required: "You should write password for login.",
+          })}
+          type='password'
+          id='password'
+          onChange={onChangeHandler}
+        />
+      </InputWrapper>
+      {errors?.password ? (
+        <ErrorWrapper>
+          <H4_ERR>{errors.password.message}</H4_ERR>
+        </ErrorWrapper>
+      ) : null}
       <Button type='submit' size='lg' content='Login' />
     </Form>
   );
@@ -85,6 +97,38 @@ const Login = (props) => {
 
 export default Login;
 
+const Form = styled.form`
+  width: 70%;
+  height: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  box-sizing: border-box;
+  padding-left: 10%;
+`;
+
+const InputWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 5px 0px;
+`;
+
 const Input = styled.input`
-  margin-left: 10px;
+  width: 100%;
+`;
+
+const ErrorWrapper = styled.div`
+  box-sizing: border-box;
+  padding: 0px 0px 20px;
+`;
+
+const ButtonWrapper = styled.div`
+  box-sizing: border-box;
+  padding: 10px;
 `;

@@ -4,16 +4,15 @@ import { useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
 
-import { Form } from "../styled/User";
 import { H3, H4, H4_ERR, H4_SUC } from "../styled/Hn";
 import Button from "../../elements/Button";
 
 import RESP from "../../server/response";
 import axios from "axios";
 
-// TODO 유효성겁사 프론트단? 백단?
-// TODO FE encoding?
-// TODO check validate!
+// TODO react-hook-form은 제출시에만 체크하므로, 유효성겁사 바로 안사라져서 불편함...
+// 차라리 onchangehandler에 유효성 검사 다는 편이 효율적일듯..
+
 const Signup = (props) => {
   const [userInfo, setUserInfo] = useState({
     username: "",
@@ -52,6 +51,15 @@ const Signup = (props) => {
 
   const checkusernameHandler = async (e) => {
     const username = userInfo.username;
+    if (!username) {
+      setCheck({
+        ...check,
+        username: false,
+        usernameMsg: "You should write username for check!",
+      });
+      return;
+    }
+
     // console.log(username);
     // const {
     //   result,
@@ -67,8 +75,17 @@ const Signup = (props) => {
     setCheck({ ...check, username: result, usernameMsg: message });
   };
 
-  const checkNickHandler = (e) => {
-    // const nickname = userInfo.nickname;
+  const checkNickHandler = async (e) => {
+    const nickname = userInfo.nickname;
+    if (!nickname) {
+      setCheck({
+        ...check,
+        nickname: false,
+        nicknameMsg: "You should write nickname for check!",
+      });
+      return;
+    }
+
     // const {
     //   result,
     //   status: { message },
@@ -83,6 +100,16 @@ const Signup = (props) => {
   const checkPWandler = (e) => {
     const password = userInfo.password;
     const passwordCheck = userInfo.passwordCheck;
+
+    if (!password) {
+      setCheck({
+        ...check,
+        password: false,
+        passwordMsg: "You should write password for check!",
+      });
+      return;
+    }
+
     const result = password === passwordCheck;
     const message = result
       ? "Password matched!"
@@ -91,6 +118,7 @@ const Signup = (props) => {
   };
 
   const submitHandler = async (formData) => {
+    console.log("submitted");
     console.log(formData);
     // const resp = axios.post(`http://3.34.47.86/user/signup`, formData);
     // console.log(resp);
@@ -109,12 +137,12 @@ const Signup = (props) => {
     <Form onSubmit={handleSubmit(submitHandler)}>
       <HelperWrapper>
         <H3 as='label' htmlFor='username'>
-          id
+          ID
         </H3>
         <H4>Use 8 to 16 characters with a mix of letters, numbers.</H4>
       </HelperWrapper>
       <InputWrapper>
-        <input
+        <Input
           type='text'
           {...register("username", {
             required: "You should write username.",
@@ -142,7 +170,12 @@ const Signup = (props) => {
           <H4_ERR>{check.usernameMsg}</H4_ERR>
         )}
       </InputWrapper>
-      {errors?.username && <H4_ERR>{errors.username.message}</H4_ERR>}
+      {errors?.username && (
+        <ErrorWrapper>
+          <H4_ERR>{errors.username.message}</H4_ERR>
+        </ErrorWrapper>
+      )}
+
       <HelperWrapper>
         <H3 as='label' htmlFor='nickname'>
           Nickname
@@ -153,7 +186,7 @@ const Signup = (props) => {
         </H4>
       </HelperWrapper>
       <InputWrapper>
-        <input
+        <Input
           type='text'
           {...register("nickname", {
             required: "You should write Nickname.",
@@ -181,7 +214,13 @@ const Signup = (props) => {
           <H4_ERR>{check.nicknameMsg}</H4_ERR>
         )}
       </InputWrapper>
-      {errors?.nickname && <H4_ERR>{errors.nickname.message}</H4_ERR>}
+
+      {errors?.nickname && (
+        <ErrorWrapper>
+          <H4_ERR>{errors.nickname.message}</H4_ERR>
+        </ErrorWrapper>
+      )}
+
       <HelperWrapper>
         <H3 as='label' htmlFor='password'>
           Password
@@ -192,18 +231,18 @@ const Signup = (props) => {
         </H4>
       </HelperWrapper>
       <InputWrapper>
-        <input
+        <Input
           type='password'
           {...register("password", {
             required: true,
             pattern: {
               value: /[a-zA-Z0-9!@#$%^&*()?_~]{8,16}/,
               message:
-                "Password should be 2 to 8 characters with a mix of letters, numbers and special characters.",
+                "Password should be 8 to 16 characters with a mix of letters, numbers and special characters.",
             },
             validate: {
               noWhiteSpace: (v) =>
-                !/[\s]/g.test(v) || "Nickname cannot contain space.",
+                !/[\s]/g.test(v) || "Password cannot contain space.",
               mixOfTwo: (v) => {
                 let cnt = 0;
                 if (v.search(/[0-9]/) !== -1) cnt++;
@@ -211,7 +250,7 @@ const Signup = (props) => {
                 if (v.search(/[!@#$%^&*()?_~]/) !== -1) cnt++;
                 return (
                   cnt > 1 ||
-                  "Nickname should contain two of followings: letters, numbers, special characters."
+                  "Password should contain two of followings: letters, numbers, special characters."
                 );
               },
             },
@@ -219,7 +258,11 @@ const Signup = (props) => {
           onChange={changeHandler}
         />
       </InputWrapper>
-      {errors?.password && <H4_ERR>{errors.password.message}</H4_ERR>}
+      {errors?.password && (
+        <ErrorWrapper>
+          <H4_ERR>{errors.password.message}</H4_ERR>
+        </ErrorWrapper>
+      )}
       <HelperWrapper>
         <H3 as='label' htmlFor='password check'>
           Password Check
@@ -227,7 +270,7 @@ const Signup = (props) => {
         <H4>Use 8 to 16 characters with a mix of letters, numbers.</H4>
       </HelperWrapper>
       <InputWrapper>
-        <input
+        <Input
           type='password'
           {...register("passwordCheck", { required: true })}
           onChange={changeHandler}
@@ -244,22 +287,40 @@ const Signup = (props) => {
           <H4_ERR>{check.passwordMsg}</H4_ERR>
         )}
       </InputWrapper>
-      <Button
-        type='submit'
-        size='lg'
-        content='Sign up'
-        disabled={!(check.username && check.nickname & check.password)}
-      />
+      <ButtonWrapper>
+        <Button
+          type='submit'
+          size='lg'
+          content='Sign up'
+          disabled={!(check.username && check.nickname & check.password)}
+        />
+      </ButtonWrapper>
     </Form>
   );
 };
 
 export default Signup;
 
+const Form = styled.form`
+  width: 70%;
+  height: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  box-sizing: border-box;
+  padding-left: 10%;
+`;
+
 const HelperWrapper = styled.div`
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+`;
+
+const Input = styled.input`
+  width: 100%;
 `;
 
 const InputWrapper = styled.div`
@@ -269,5 +330,15 @@ const InputWrapper = styled.div`
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  padding: 0px 10px 10px;
+  padding: 5px 0px;
+`;
+
+const ErrorWrapper = styled.div`
+  box-sizing: border-box;
+  padding: 0px 0px 20px;
+`;
+
+const ButtonWrapper = styled.div`
+  box-sizing: border-box;
+  padding: 10px;
 `;
