@@ -5,7 +5,8 @@ import { useDispatch } from "react-redux";
 
 import styled from "styled-components";
 import RESP from "../../server/response";
-// import axios from 'axios';
+
+import axios from "axios";
 import { login } from "../../modules/redux/user";
 
 import { H3, H4_ERR } from "../styled/Hn";
@@ -36,19 +37,31 @@ const Login = (props) => {
   };
 
   const onSubmitHandler = async (formData) => {
-    console.log(formData);
-    // const { result, status: { message } } = await axios.post(`http://localhost:3000/user/login`, formData);
+    // console.log(formData);
+
+    const resp = await axios.post(`http://3.34.47.86/user/login`, formData);
     const {
-      result,
-      status: { message },
-    } = RESP.LOGIN_SUCCESS;
-    const { Authorization, RefreshToken } = RESP.LOGIN_HEADER;
+      headers: { authorization, refreshtoken },
+      data: {
+        result,
+        status: { message },
+      },
+    } = await axios.post(`http://3.34.47.86/user/login`, formData);
+    console.log(resp);
+
+    // const {
+    //   result,
+    //   status: { message },
+    // } = RESP.LOGIN_SUCCESS;
+
+    // const { Authorization, RefreshToken } = RESP.LOGIN_HEADER;
+
     if (!result) {
       alert(message);
       return;
     }
-    localStorage.setItem("AccessToken", Authorization);
-    localStorage.setItem("RefreshToken", RefreshToken);
+    localStorage.setItem("AccessToken", authorization);
+    localStorage.setItem("RefreshToken", refreshtoken);
     dispatch(login());
     navigate("/home");
   };

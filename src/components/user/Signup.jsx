@@ -61,17 +61,19 @@ const Signup = (props) => {
     }
 
     // console.log(username);
+    const {
+      data: {
+        result,
+        status: { message },
+      },
+    } = await axios.post(`http://3.34.47.86/user/username`, {
+      username,
+    });
     // const {
     //   result,
     //   status: { message },
-    // } = await axios.post(`http://3.34.47.86/user/username`, {
-    //   username,
-    // });
-    // console.log(result, message);
-    const {
-      result,
-      status: { message },
-    } = RESP.ID_CHECK_SUCCESS;
+    // } = RESP.ID_CHECK_SUCCESS;
+
     setCheck({ ...check, username: result, usernameMsg: message });
   };
 
@@ -86,14 +88,17 @@ const Signup = (props) => {
       return;
     }
 
+    const {
+      data: {
+        result,
+        status: { message },
+      },
+    } = await axios.post(`http://3.34.47.86/user/nickname`, { nickname });
+
     // const {
     //   result,
     //   status: { message },
-    // } = awiat axios.post(`http://localhost:3000/user/nickname`, { nickname });
-    const {
-      result,
-      status: { message },
-    } = RESP.NICKNAME_CHECK_SUCCESS;
+    // } = RESP.NICKNAME_CHECK_SUCCESS;
     setCheck({ ...check, nickname: result, nicknameMsg: message });
   };
 
@@ -119,14 +124,19 @@ const Signup = (props) => {
 
   const submitHandler = async (formData) => {
     console.log("submitted");
-    console.log(formData);
-    // const resp = axios.post(`http://3.34.47.86/user/signup`, formData);
-    // console.log(resp);
+    // console.log(formData);
+
     const {
-      result,
-      data,
-      status: { message },
-    } = RESP.SIGN_UP_SUCCESS;
+      data: {
+        result,
+        status: { message },
+      },
+    } = await axios.post(`http://3.34.47.86/user/signup`, formData);
+    // const {
+    //   result,
+    //   status: { message },
+    // } = RESP.SIGN_UP_SUCCESS;
+
     alert(message);
     if (result) {
       navigate("/login");

@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-// import axios from "axios";
+import axios from "axios";
+
 import RESP from "../../server/response";
 
 import Post from "./Post";
@@ -11,13 +12,16 @@ const Posts = (props) => {
 
   const navigate = useNavigate();
 
+  // TODO API 문서 제발좀...
   const getPosts = async (pageNum, pageLimit) => {
     // const {
-    //   result,
-    //   data,
-    //   status: { message },
+    //   data: {
+    //     result,
+    //     data,
+    //     status: { message },
+    //   },
     // } = await axios.get(
-    //   `http://localhost:3000/api/posts?pageNum=${pageNum}&pageLimit=${pageLimit}`,
+    //   `http://3.34.47.86/api/posts?pageNum=${pageNum}&pageLimit=${pageLimit}`,
     //   {
     //     headers: {
     //       Authorization: localStorage.getItem("AccessToken"),
@@ -26,12 +30,13 @@ const Posts = (props) => {
     //   }
     // );
 
+    // console.log(result, data);
+
     const {
       result,
       data,
       status: { message },
     } = RESP.GET_POSTS_SUCCESS;
-    // console.log(data);
 
     if (!result) {
       alert(message);
