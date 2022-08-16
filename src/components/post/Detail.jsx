@@ -76,17 +76,23 @@ const Detail = (props) => {
   };
 
   const deletePost = async () => {
-    // const { result, status: { message } } = await axios.delete(`http://localhost:3000/api/post/${id}`, {
-    // 	headers: {
-    // 		'Authorization': localStorage.getItem('AccessToken'),
-    // 		'RefreshToken': localStorage.getItem('RefreshToken'),
-    // 	}
-    // })
+    // const {
+    //   data: {
+    //     result,
+    //     status: { message },
+    //   },
+    // } = await axios.delete(`http://3.34.47.86/api/post/${id}`, {
+    //   headers: {
+    //     Authorization: localStorage.getItem("AccessToken"),
+    //     RefreshToken: localStorage.getItem("RefreshToken"),
+    //   },
+    // });
 
     const {
       result,
       status: { message },
     } = RESP.DELETE_POST_SUCCESS;
+
     if (!result) {
       alert(message);
       return;

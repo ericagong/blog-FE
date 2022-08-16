@@ -32,7 +32,9 @@ const Header = (props) => {
           size={"lg"}
           onClick={() => onClickHandler("/home")}
         />
-        <H2>mini-SNS</H2>
+        <ProjectName>
+          <H2>mini-SNS</H2>
+        </ProjectName>
       </Container>
       {!isLogin ? (
         <Container>
@@ -72,4 +74,9 @@ const Container = styled.div`
   align-items: center;
   justify-content: ${(props) =>
     props.size === "small" ? "flex-start" : "flex-end"};
+`;
+
+const ProjectName = styled.div`
+  box-sizing: border-box;
+  padding-left: 10px;
 `;

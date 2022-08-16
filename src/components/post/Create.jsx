@@ -5,12 +5,12 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import { Form } from "../styled/User";
-import { H3, H3_BOLD, H4, H4_ERR } from "../styled/Hn";
+import { H3, H3_BOLD, H4_ERR } from "../styled/Hn";
 import ImageView from "./ImageView";
 import Button from "../../elements/Button";
 
 import RESP from "../../server/response";
-// import axios from "axios";
+import axios from "axios";
 
 // TODO input type='file' css customizing
 // TODO loading spinner 적용
@@ -36,9 +36,9 @@ const Create = (props) => {
     }
 
     console.log(fileList);
-    for (let key of formData.entries()) {
-      console.log(`${key}`);
-    }
+    // for (let key of formData.entries()) {
+    //   console.log(`${key}`);
+    // }
 
     setFiles([...fileList]);
 
@@ -47,17 +47,21 @@ const Create = (props) => {
       return;
     }
 
-    // const { imageUrls } = await axios.post(
-    //   `http://localhost:3000/api/image`,
-    //   files,
-    //   {
-    //     headers: {
-    //       'Authorization': localStorage.getItem("AccessToken"),
-    // 			'RefreshToken': localStorage.getItem("RefreshToken"),
-    // 			'contents-type': 'multipart/form-data'
-    //     },
-    //   }
-    // );
+    // const body = {
+    // 	multipartFile: files,
+    // 	'content-type': 'multipart/form-data'
+    // }
+
+    // TODO change to /api/image
+    // const resp = await axios.post(`http://3.34.47.86/api/image`, files, {
+    //   headers: {
+    //     Authorization: localStorage.getItem("AccessToken"),
+    //     RefreshToken: localStorage.getItem("RefreshToken"),
+    //     "Content-Type": "multipart/form-data",
+    //   },
+    // });
+
+    // console.log(resp);
 
     const { imageUrl } = RESP.UPLOAD_PHOTO_SUCCESS;
     setUrls(imageUrl);
@@ -70,7 +74,6 @@ const Create = (props) => {
     console.log(formData);
     const { title, content } = formData;
 
-    // 단일 사진으로 고치기?
     const post = {
       title,
       content,
@@ -80,14 +83,18 @@ const Create = (props) => {
     console.log(post);
 
     // const {
-    //   result,
-    //   status: { message },
-    // } = axios.post(`http://localhost:3000/api/post`, post, {
+    //   data: {
+    //     result,
+    //     status: { message },
+    //   },
+    // } = axios.post(`http://3.34.47.86/api/post`, post, {
     //   headers: {
-    //     'Authorization': localStorage.getItem("AccessToken"),
-    //     'RefreshToken': localStorage.getItem("RefreshToken"),
+    //     Authorization: localStorage.getItem("AccessToken"),
+    //     RefreshToken: localStorage.getItem("RefreshToken"),
     //   },
     // });
+
+    // console.log(result, message);
 
     const {
       result,
