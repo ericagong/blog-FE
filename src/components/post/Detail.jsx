@@ -28,7 +28,12 @@ const Detail = (props) => {
   const navigate = useNavigate();
 
   const getPost = async () => {
-    // const { result, data } = await axios.get(`http://localhost:3000/api/post/${id}`);
+    // const { result, data } = await axios.get(`http://localhost:3000/api/post/${id}`, {
+    // 	headers: {
+    // 		'Authorization': localStorage.getItem('AccessToken'),
+    // 		'RefreshToken': localStorage.getItem('RefreshToken')
+    // 	}
+    // });
     const { result, data } = RESP.GET_POST_SUCCESS;
     if (!result) {
       navigate("/home");
@@ -42,7 +47,13 @@ const Detail = (props) => {
   const getComments = async () => {
     const commentsNum = 1;
     const pageLimit = 5;
-    // const { result, data } = await axios.get(`http://localhost:3000/api/post/${id}/comments?comentsNum=${commentsNum}&pageLimit=${pageLimit}`);
+    // const { result, data } =
+    //   await axios.get(`http://localhost:3000/api/post/${id}/comments?comentsNum=${commentsNum}&pageLimit=${pageLimit}, {
+    //   headers: {
+    //     'Authorization': localStorage.getItem("AccessToken"),
+    //     'RefreshToken': localStorage.getItem("RefreshToken"),
+    //   },
+    // }`);
     const { result, data } = RESP.GET_COMMENTS_SUCCESS;
     if (!result) {
       navigate("/home");
@@ -70,6 +81,12 @@ const Detail = (props) => {
     "/" +
     modifiedAt.slice(8, 10);
 
+  const onClickEdit = (e) => {
+    navigate(`/edit/${id}`);
+  };
+
+  const onClickDelete = (e) => {};
+
   return (
     <>
       {post ? <ImageView urls={imageUrl} size='sm' /> : null}
@@ -78,8 +95,18 @@ const Detail = (props) => {
           <H3>{title}</H3>
           {isMine ? (
             <ButtonWrapper>
-              <Button content='Edit' type='button' size='sm' />
-              <Button content='Delete' type='button' size='sm' />
+              <Button
+                content='Edit'
+                type='button'
+                size='sm'
+                onClick={onClickEdit}
+              />
+              <Button
+                content='Delete'
+                type='button'
+                size='sm'
+                onClick={onClickDelete}
+              />
             </ButtonWrapper>
           ) : null}
         </Header>

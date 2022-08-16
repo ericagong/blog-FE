@@ -1,10 +1,13 @@
+import Layout from "../../components/styled/Layout";
+import Header from "../../components/common/Header";
+import EditLayout from "../../components/post/EditLayout";
+
 const Edit = (props) => {
   return (
-    <>Edit</>
-    // <Layout>
-    // 	<Header />
-    // 	<EditLayout/>
-    // </Layout>
+    <Layout>
+      <Header />
+      <EditLayout />
+    </Layout>
   );
 };
 

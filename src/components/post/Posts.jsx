@@ -12,7 +12,20 @@ const Posts = (props) => {
   const navigate = useNavigate();
 
   const getPosts = async (pageNum, pageLimit) => {
-    // const { result, data, status: { message } } = await axios.get(`http://localhost:3000/api/posts?pageNum=${pageNum}&pageLimit=${pageLimit}`);
+    // const {
+    //   result,
+    //   data,
+    //   status: { message },
+    // } = await axios.get(
+    //   `http://localhost:3000/api/posts?pageNum=${pageNum}&pageLimit=${pageLimit}`,
+    //   {
+    //     headers: {
+    //       Authorization: localStorage.getItem("AccessToken"),
+    //       RefreshToken: localStorage.getItem("RefreshToken"),
+    //     },
+    //   }
+    // );
+
     const {
       result,
       data,

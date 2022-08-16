@@ -52,7 +52,7 @@ const Create = (props) => {
     //   files,
     //   {
     //     headers: {
-    //       'Authorization': localStorage.getItem("Authorization"),
+    //       'Authorization': localStorage.getItem("AccessToken"),
     // 			'RefreshToken': localStorage.getItem("RefreshToken"),
     // 			'contents-type': 'multipart/form-data'
     //     },
@@ -78,7 +78,17 @@ const Create = (props) => {
     };
 
     console.log(post);
-    // const { result, status: { message } } = axios.post(`http://localhost:3000/api/post`, post);
+
+    // const {
+    //   result,
+    //   status: { message },
+    // } = axios.post(`http://localhost:3000/api/post`, post, {
+    //   headers: {
+    //     'Authorization': localStorage.getItem("AccessToken"),
+    //     'RefreshToken': localStorage.getItem("RefreshToken"),
+    //   },
+    // });
+
     const {
       result,
       status: { message },
@@ -175,19 +185,6 @@ const TitleWrapper = styled.div`
 
 const InputWrapper = styled.div`
   margin-bottom: 5px;
-`;
-
-const Preview = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Image = styled.img`
-  width: 90%;
-  box-sizing: border-box;
-  padding: 0px 10px;
 `;
 
 const Input = styled.input`
