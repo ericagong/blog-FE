@@ -14,6 +14,10 @@ export const H3 = styled.div`
   font-size: 0.9rem;
 `;
 
+export const H3_BOLD = styled(H3)`
+  font-weight: bold;
+`;
+
 export const H4 = styled.div`
   font-weight: lighter;
   font-size: 0.7rem;

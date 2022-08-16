@@ -6,7 +6,9 @@ import Create from "./Create";
 const CreateLayout = (props) => {
   return (
     <Wrapper>
-      <H1>Create New Post</H1>
+      <TitleWrapper>
+        <H1>Create New Post</H1>
+      </TitleWrapper>
       <Create />
     </Wrapper>
   );
@@ -21,10 +23,11 @@ const Wrapper = styled.div`
   justify-content: flex-start;
   align-items: center;
   box-sizing: border-box;
-  padding-top: 50px;
+  margin-top: 50px;
+  overflow: scroll;
 `;
 
 const TitleWrapper = styled.div`
   box-sizing: border-box;
-  padding-bottom: 30px;
+  padding-bottom: 10px;
 `;

@@ -103,8 +103,11 @@ const RESP = {
 
   // for post realted APIs
   UPLOAD_PHOTO_SUCCESS: {
-    imageUrl:
+    imageUrl: [
       "https://user-images.githubusercontent.com/48196721/184591700-c3d418d5-d013-4659-b93b-b18fd45bb940.jpeg",
+      "https://user-images.githubusercontent.com/48196721/184771730-4acbc6a6-0b91-430b-8352-eea7617e7a41.jpeg",
+      "https://user-images.githubusercontent.com/48196721/184771766-ee26a6c5-cfa4-4b9e-a91e-6bfb695f4670.jpeg",
+    ],
   },
   CREATE_POST_SUCCESS: {
     result: true,

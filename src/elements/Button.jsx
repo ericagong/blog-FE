@@ -27,6 +27,9 @@ const Icon = styled(FontAwesomeIcon)`
     transition: ${(props) => props.theme.transition};
     transform: ${(props) => props.theme.hoverTransform};
   }
+  &:disabled {
+    cursor: not-allowed;
+  }
 `;
 
 const Btn = styled.button.attrs((props) => ({
