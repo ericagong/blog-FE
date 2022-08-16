@@ -1,32 +1,33 @@
 import styled from "styled-components";
 
 import { H1 } from "../styled/Hn";
-import Posts from "./Posts";
+import Edit from "./Edit";
 
-// TODO delete H1?
-const HomeLayout = (props) => {
+const EditLayout = (props) => {
   return (
     <Wrapper>
       <TitleWrapper>
-        <H1>Home</H1>
+        <H1>Edit Post</H1>
       </TitleWrapper>
-      <Posts />
+      <Edit />
     </Wrapper>
   );
 };
 
-export default HomeLayout;
+export default EditLayout;
 
 const Wrapper = styled.div`
+  width: 70%;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
-  margin-top: 50px;
   box-sizing: border-box;
+  margin-top: 50px;
   overflow: scroll;
 `;
 
 const TitleWrapper = styled.div`
   box-sizing: border-box;
-  padding-bottom: 30px;
+  padding-bottom: 10px;
 `;

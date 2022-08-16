@@ -10,6 +10,7 @@ const api = axios.create({
 
 // TODO login, signup, nicknamecheck, idcheck에는 안들어가게 처리해야하나?
 // 3가지 방법 중 실무에서는 무엇 사용?
+// 조건부 분기
 api.interceptors.request.use(function (config) {
   // TODO parsing 로직 다시 짜기
   // const auth = localStorage.getItem('AccessToken');

@@ -9,21 +9,22 @@ import { H3, H4, H4_ERR, H4_SUC } from "../styled/Hn";
 import Button from "../../elements/Button";
 
 import RESP from "../../server/response";
-// import axios from "axios";
+import axios from "axios";
 
 // TODO 유효성겁사 프론트단? 백단?
 // TODO FE encoding?
+// TODO check validate!
 const Signup = (props) => {
   const [userInfo, setUserInfo] = useState({
-    id: "",
+    username: "",
     nickname: "",
     password: "",
     passwordCheck: "",
   });
 
   const [check, setCheck] = useState({
-    id: false,
-    idMsg: "",
+    username: false,
+    usernameMsg: "",
     nickname: false,
     nicknameMsg: "",
     password: false,
@@ -49,17 +50,21 @@ const Signup = (props) => {
     setCheck({ ...check, [name]: false, [nameMsg]: "" });
   };
 
-  const checkIDHandler = async (e) => {
-    // const username = userInfo.id;
+  const checkusernameHandler = async (e) => {
+    const username = userInfo.username;
+    // console.log(username);
     // const {
     //   result,
     //   status: { message },
-    // } = await axios.post(`http://localhost:3000/user/username`, {username});
+    // } = await axios.post(`http://3.34.47.86/user/username`, {
+    //   username,
+    // });
+    // console.log(result, message);
     const {
       result,
       status: { message },
     } = RESP.ID_CHECK_SUCCESS;
-    setCheck({ ...check, id: result, idMsg: message });
+    setCheck({ ...check, username: result, usernameMsg: message });
   };
 
   const checkNickHandler = (e) => {
@@ -87,7 +92,8 @@ const Signup = (props) => {
 
   const submitHandler = async (formData) => {
     console.log(formData);
-    // const resp = axios.post(`http://localhost:3000/signup`, formData);
+    // const resp = axios.post(`http://3.34.47.86/user/signup`, formData);
+    // console.log(resp);
     const {
       result,
       data,
@@ -102,16 +108,16 @@ const Signup = (props) => {
   return (
     <Form onSubmit={handleSubmit(submitHandler)}>
       <HelperWrapper>
-        <H3 as='label' htmlFor='ID'>
-          ID
+        <H3 as='label' htmlFor='username'>
+          id
         </H3>
         <H4>Use 8 to 16 characters with a mix of letters, numbers.</H4>
       </HelperWrapper>
       <InputWrapper>
         <input
           type='text'
-          {...register("id", {
-            required: "You should write ID.",
+          {...register("username", {
+            required: "You should write username.",
             pattern: {
               value: /[A-Za-z0-9]{8,16}/,
               message:
@@ -128,15 +134,15 @@ const Signup = (props) => {
           type='button'
           size='sm'
           content='check'
-          onClick={checkIDHandler}
+          onClick={checkusernameHandler}
         />
-        {check.id ? (
-          <H4_SUC>{check.idMsg}</H4_SUC>
+        {check.username ? (
+          <H4_SUC>{check.usernameMsg}</H4_SUC>
         ) : (
-          <H4_ERR>{check.idMsg}</H4_ERR>
+          <H4_ERR>{check.usernameMsg}</H4_ERR>
         )}
       </InputWrapper>
-      {errors?.ID && <H4_ERR>{errors.ID.message}</H4_ERR>}
+      {errors?.username && <H4_ERR>{errors.username.message}</H4_ERR>}
       <HelperWrapper>
         <H3 as='label' htmlFor='nickname'>
           Nickname
@@ -242,7 +248,7 @@ const Signup = (props) => {
         type='submit'
         size='lg'
         content='Sign up'
-        disabled={!(check.id && check.nickname & check.password)}
+        disabled={!(check.username && check.nickname & check.password)}
       />
     </Form>
   );
