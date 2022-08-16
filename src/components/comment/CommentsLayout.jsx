@@ -14,13 +14,12 @@ const CommentsLayout = (props) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({ mode: "onChange" });
 
   const onSubmitHandler = (formData) => {
     console.log(formData);
   };
 
-  console.log(errors?.content);
   return (
     <>
       <Form onSubmit={handleSubmit(onSubmitHandler)}>
@@ -38,9 +37,13 @@ const CommentsLayout = (props) => {
             id='content'
             placeholder='Write comment here...'
           />
-
           <Button type='submit' content='Create' />
         </InputWrapper>
+        {errors?.content ? (
+          <ErrorWrapper>
+            <H4_ERR>{errors.content.message}</H4_ERR>
+          </ErrorWrapper>
+        ) : null}
       </Form>
     </>
   );
@@ -57,4 +60,9 @@ const InputWrapper = styled.div`
 
 const Input = styled.input`
   width: 100%;
+`;
+
+const ErrorWrapper = styled.div`
+  box-sizing: border-box;
+  padding: 0px 10px 20px;
 `;

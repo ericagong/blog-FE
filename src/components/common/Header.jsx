@@ -17,6 +17,7 @@ const Header = (props) => {
     navigate(path);
   };
 
+  // TODO logout 서버 연결..
   const logoutHandler = () => {
     dispatch(logout());
     localStorage.removeItem("AccessToken");

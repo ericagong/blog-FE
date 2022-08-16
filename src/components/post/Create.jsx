@@ -10,7 +10,7 @@ import ImageView from "./ImageView";
 import Button from "../../elements/Button";
 
 import RESP from "../../server/response";
-import axios from "axios";
+// import axios from "axios";
 
 // TODO input type='file' css customizing
 // TODO loading spinner 적용

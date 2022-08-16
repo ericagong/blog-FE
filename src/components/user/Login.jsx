@@ -140,8 +140,3 @@ const ErrorWrapper = styled.div`
   box-sizing: border-box;
   padding: 0px 0px 20px;
 `;
-
-const ButtonWrapper = styled.div`
-  box-sizing: border-box;
-  padding: 10px;
-`;
