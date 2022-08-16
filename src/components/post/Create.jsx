@@ -115,7 +115,7 @@ const Create = (props) => {
           />
         </InputWrapper>
         {/* {isLoading ? <H4>Loading...</H4> : null} */}
-        {urls ? <ImageView urls={urls} /> : null}
+        {urls ? <ImageView urls={urls} size='lg' /> : null}
         <TitleWrapper>
           <H3_BOLD as='label' htmlFor='title'>
             Title

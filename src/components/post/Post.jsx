@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import { H3, H5, H5_EFF } from "../styled/Hn";
+import ImageView from "../post/ImageView";
 import Button from "../../elements/Button";
 
 // TODO : 요약 추가?
@@ -31,12 +32,12 @@ const Post = ({
 
   return (
     <>
-      <Image src={imageUrl} alt='' />
+      <ImageView urls={imageUrl} size='sm' />
       <Card>
         <Header>
-          <H3>{title}</H3>
+          <H3>{title.length > 25 ? title.slice(0, 24) + "..." : title}</H3>
           <Button
-            content='상세페이지'
+            content='Detail'
             type='button'
             size='sm'
             onClick={onClickHandler}
@@ -45,8 +46,8 @@ const Post = ({
         <H5>
           Creator: {nickname} | {date}
         </H5>
+        <H5>{content.length > 41 ? content.slice(0, 41) + "..." : content}</H5>
         <H5_EFF onClick={onClickHandler}>Comments: {numComments}</H5_EFF>
-        <H5>{content}</H5>
       </Card>
     </>
   );
@@ -57,11 +58,8 @@ export default Post;
 const Card = styled.div`
   width: 70%;
   box-sizing: border-box;
+  padding: 0px 10px;
   padding-bottom: 50px;
-`;
-
-const Image = styled.img`
-  width: 70%;
 `;
 
 const Header = styled.div`

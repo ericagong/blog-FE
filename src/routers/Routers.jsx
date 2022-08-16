@@ -20,8 +20,8 @@ const Routers = (props) => {
         <Route path='/signup' element={<Signup />} />
         <Route path='/my' element={<My />} />
         <Route path='/create' element={<Create />} />
-        <Route path='/detail/:post_id' element={<Detail />} />
-        <Route path='/edit/:post_id' element={<Edit />} />
+        <Route path='/detail/:id' element={<Detail />} />
+        <Route path='/edit/:id' element={<Edit />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </BrowserRouter>

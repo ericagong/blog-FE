@@ -8,7 +8,7 @@ import {
 
 import Button from "../../elements/Button";
 
-const ImageView = ({ urls }) => {
+const ImageView = ({ urls, size }) => {
   const [curr, setCurr] = useState(0);
 
   const onClickPrev = (e) => {
@@ -28,7 +28,7 @@ const ImageView = ({ urls }) => {
   return (
     <Preview>
       <Button icon={faArrowCircleLeft} onClick={onClickPrev} />
-      <Image src={urls[curr]} alt='' />
+      <Image src={urls[curr]} alt='' size={size} />
       <Button icon={faArrowCircleRight} onClick={onClickNext} />
     </Preview>
   );
@@ -44,7 +44,7 @@ const Preview = styled.div`
 `;
 
 const Image = styled.img`
-  width: 90%;
+  width: ${(props) => (props.size === "lg" ? "100%" : "70%")};
   box-sizing: border-box;
   padding: 0px 10px;
 `;
