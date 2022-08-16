@@ -71,8 +71,38 @@ const Detail = (props) => {
     getComments();
   }, []);
 
+  const onClickEdit = (e) => {
+    navigate(`/edit/${id}`);
+  };
+
+  const deletePost = async () => {
+    // const { result, status: { message } } = await axios.delete(`http://localhost:3000/api/post/${id}`, {
+    // 	headers: {
+    // 		'Authorization': localStorage.getItem('AccessToken'),
+    // 		'RefreshToken': localStorage.getItem('RefreshToken'),
+    // 	}
+    // })
+
+    const {
+      result,
+      status: { message },
+    } = RESP.DELETE_POST_SUCCESS;
+    if (!result) {
+      alert(message);
+      return;
+    }
+    navigate("/home");
+  };
+
+  const onClickDelete = (e) => {
+    const answer = window.confirm("Are you sure to delete this post?");
+    if (!answer) {
+      return;
+    }
+    deletePost();
+  };
+
   const { nickname, title, content, imageUrl, isMine, modifiedAt } = post;
-  const postId = post.id;
   const date =
     "modified at " +
     modifiedAt.slice(0, 4) +
@@ -80,12 +110,6 @@ const Detail = (props) => {
     modifiedAt.slice(5, 7) +
     "/" +
     modifiedAt.slice(8, 10);
-
-  const onClickEdit = (e) => {
-    navigate(`/edit/${id}`);
-  };
-
-  const onClickDelete = (e) => {};
 
   return (
     <>
