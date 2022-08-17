@@ -24,19 +24,24 @@ const CommentsLayout = (props) => {
   const isLogin = useSelector((state) => state.user.isLogin);
 
   const onSubmitHandler = async (formData) => {
-    // console.log(formData);
-
-    // const { data: { result, status: { message } } } = await axios.post(`http://localhost:3000/api/post/${id}/comment`, formData, {
-    // 	headers: {
-    // 		Authorization: localStorage.getItem('AccessToken'),
-    // 		RefreshToken: localStorage.getItem('RefreshToken')
-    // 	}
-    // });
+    console.log(formData);
 
     const {
-      result,
-      status: { message },
-    } = RESP.CREATE_COMMENT_SUCCESS;
+      data: {
+        result,
+        status: { message },
+      },
+    } = await axios.post(`http://3.34.47.86/api/post/${id}/comment`, formData, {
+      headers: {
+        Authorization: localStorage.getItem("AccessToken"),
+        RefreshToken: localStorage.getItem("RefreshToken"),
+      },
+    });
+
+    // const {
+    //   result,
+    //   status: { message },
+    // } = RESP.CREATE_COMMENT_SUCCESS;
 
     if (!result) {
       alert(message);

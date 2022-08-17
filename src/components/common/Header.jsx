@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
-// import axios from "axios";
-import RESP from "../../server/response";
+import axios from "axios";
+// import RESP from "../../server/response";
 
 import { logout } from "../../modules/redux/user";
 import { H2 } from "../styled/Hn";
@@ -23,22 +23,22 @@ const Header = (props) => {
 
   // TODO error!
   const logoutHandler = async () => {
-    // const {
-    //   data: {
-    //     result,
-    //     status: { message },
-    //   },
-    // } = await axios.get(`http://3.34.47.86/user/logout`, {
-    //   headers: {
-    //     Authorization: localStorage.getItem("AccessToken"),
-    //     RefreshToken: localStorage.getItem("RefreshToken"),
-    //   },
-    // });
-
     const {
-      result,
-      status: { message },
-    } = RESP.LOGOUT_SUCCESS;
+      data: {
+        result,
+        status: { message },
+      },
+    } = await axios.get(`http://3.34.47.86/user/logout`, {
+      headers: {
+        Authorization: localStorage.getItem("AccessToken"),
+        RefreshToken: localStorage.getItem("RefreshToken"),
+      },
+    });
+
+    // const {
+    //   result,
+    //   status: { message },
+    // } = RESP.LOGOUT_SUCCESS;
 
     if (!result) {
       alert(message);

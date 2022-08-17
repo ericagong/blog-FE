@@ -18,24 +18,28 @@ const Comments = (props) => {
 
   const navigate = useNavigate();
 
+  // TODO 에러 발생 시 홈으로 갈건지?
+  // TODO change commentsNum to state.
   const getComments = async (commentsNum, pageLimit) => {
-    // const { data: { result, data, status: { message } } } = await axios.get(`http://localhost:3000/api/post/${id}/comments?commentsNum=${commentsNum}&pageLimit=${pageLimit}`,
-    // 	{
-    // 		headers: {
-    // 			Authorization: localStorage.getItem('AccessToken'),
-    // 			RefreshToken: localStorage.getItem('RefreshToken')
-    // 	}}
-    // )
-
     const {
-      result,
-      data,
-      status: { message },
-    } = RESP.GET_COMMENTS_SUCCESS;
+      data: { result, data },
+    } = await axios.get(
+      `http://3.34.47.86/api/post/${id}/comments?commentsNum=${commentsNum}&pageLimit=${pageLimit}`,
+      {
+        headers: {
+          Authorization: localStorage.getItem("AccessToken"),
+          RefreshToken: localStorage.getItem("RefreshToken"),
+        },
+      }
+    );
+
+    console.log(result, data);
+
+    // const { result, data } = RESP.GET_COMMENTS_SUCCESS;
 
     if (!result) {
-      alert(message);
       navigate("/home");
+      return;
     }
 
     setComments([...comments, ...data]);

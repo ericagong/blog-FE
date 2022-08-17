@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 
 import styled from "styled-components";
 import { faPencil, faXmark } from "@fortawesome/free-solid-svg-icons";
-// import axios from "axios";
+import axios from "axios";
 import RESP from "../../server/response";
 
 import { deleteComment, editComment } from "../../modules/redux/comment";
@@ -42,17 +42,26 @@ const Comment = ({ id, nickname, content, isMine, postId }) => {
   const onSubmitHandler = async (formData) => {
     // console.log(formData);
 
-    // const { data: { result, status: { message } } } = await axios.post(`http://localhost:3000/api/post/${id}/comment`, formData, {
-    // 	headers: {
-    // 		Authorization: localStorage.getItem('AccessToken'),
-    // 		RefreshToken: localStorage.getItem('RefreshToken')
-    // 	}
-    // });
-
     const {
-      result,
-      status: { message },
-    } = RESP.CREATE_COMMENT_SUCCESS;
+      data: {
+        result,
+        status: { message },
+      },
+    } = await axios.put(
+      `http://3.34.47.86/api/post/${postId}/${id}`,
+      formData,
+      {
+        headers: {
+          Authorization: localStorage.getItem("AccessToken"),
+          RefreshToken: localStorage.getItem("RefreshToken"),
+        },
+      }
+    );
+
+    // const {
+    //   result,
+    //   status: { message },
+    // } = RESP.CREATE_COMMENT_SUCCESS;
 
     if (!result) {
       alert(message);
@@ -63,17 +72,22 @@ const Comment = ({ id, nickname, content, isMine, postId }) => {
   };
 
   const deletePost = async () => {
-    // const { data: { result, status: { message } } } = await axios.delete(`http://localhost:3000/api/post/${postId}/${id}`, {
-    // 	headers: {
-    // 		Authorization: localStorage.getItem('AccessToken'),
-    // 		RefreshToken: localStorage.getItem('RefreshToken')
-    // 	}
-    // })
-
     const {
-      result,
-      status: { message },
-    } = RESP.DELETE_COMMENT_SUCCESS;
+      data: {
+        result,
+        status: { message },
+      },
+    } = await axios.delete(`http://3.34.47.86/api/post/${postId}/${id}`, {
+      headers: {
+        Authorization: localStorage.getItem("AccessToken"),
+        RefreshToken: localStorage.getItem("RefreshToken"),
+      },
+    });
+
+    // const {
+    //   result,
+    //   status: { message },
+    // } = RESP.DELETE_COMMENT_SUCCESS;
 
     if (!result) {
       alert(message);

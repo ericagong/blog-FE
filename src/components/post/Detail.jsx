@@ -28,47 +28,27 @@ const Detail = (props) => {
   const navigate = useNavigate();
 
   const getPost = async () => {
-    // const { result, data } = await axios.get(`http://localhost:3000/api/post/${id}`, {
-    // 	headers: {
-    // 		'Authorization': localStorage.getItem('AccessToken'),
-    // 		'RefreshToken': localStorage.getItem('RefreshToken')
-    // 	}
-    // });
-    const { result, data } = RESP.GET_POST_SUCCESS;
-    if (!result) {
-      navigate("/home");
-      return;
-    }
-    setPost({ ...post, ...data });
-  };
+    const {
+      data: { result, data },
+    } = await axios.get(`http://3.34.47.86/api/post/${id}`, {
+      headers: {
+        Authorization: localStorage.getItem("AccessToken"),
+        RefreshToken: localStorage.getItem("RefreshToken"),
+      },
+    });
 
-  // TODO 에러 발생 시 홈으로 갈건지?
-  // TODO change commentsNum to state.
-  const getComments = async () => {
-    const commentsNum = 1;
-    const pageLimit = 5;
-    // const { result, data } =
-    //   await axios.get(`http://localhost:3000/api/post/${id}/comments?comentsNum=${commentsNum}&pageLimit=${pageLimit}, {
-    //   headers: {
-    //     'Authorization': localStorage.getItem("AccessToken"),
-    //     'RefreshToken': localStorage.getItem("RefreshToken"),
-    //   },
-    // }`);
-    const { result, data } = RESP.GET_COMMENTS_SUCCESS;
+    // const { result, data } = RESP.GET_POST_SUCCESS;
+
     if (!result) {
       navigate("/home");
       return;
     }
-    setComments([...comments, ...data]);
+
+    setPost({ ...post, ...data });
   };
 
   useEffect(() => {
     getPost();
-  }, []);
-
-  // TODO 맨 밑에 닿을 때마다 호출!
-  useEffect(() => {
-    getComments();
   }, []);
 
   const onClickEdit = (e) => {
@@ -76,27 +56,28 @@ const Detail = (props) => {
   };
 
   const deletePost = async () => {
-    // const {
-    //   data: {
-    //     result,
-    //     status: { message },
-    //   },
-    // } = await axios.delete(`http://3.34.47.86/api/post/${id}`, {
-    //   headers: {
-    //     Authorization: localStorage.getItem("AccessToken"),
-    //     RefreshToken: localStorage.getItem("RefreshToken"),
-    //   },
-    // });
-
     const {
-      result,
-      status: { message },
-    } = RESP.DELETE_POST_SUCCESS;
+      data: {
+        result,
+        status: { message },
+      },
+    } = await axios.delete(`http://3.34.47.86/api/post/${id}`, {
+      headers: {
+        Authorization: localStorage.getItem("AccessToken"),
+        RefreshToken: localStorage.getItem("RefreshToken"),
+      },
+    });
+
+    // const {
+    //   result,
+    //   status: { message },
+    // } = RESP.DELETE_POST_SUCCESS;
 
     if (!result) {
       alert(message);
       return;
     }
+
     navigate("/home");
   };
 
