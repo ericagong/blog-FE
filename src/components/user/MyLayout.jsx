@@ -52,7 +52,7 @@ function MyLayout(props) {
     getPosts(1, 5);
   }, []);
 
-  const myPosts = posts.map((post) => <div key={post.id} {...post} />);
+  const myPosts = posts.map((post) => <Post key={post.id} {...post} />);
 
   return (
     <>

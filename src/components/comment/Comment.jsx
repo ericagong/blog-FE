@@ -1,15 +1,18 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 import styled from "styled-components";
 import { faPencil, faXmark } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
+// import axios from "axios";
 import RESP from "../../server/response";
 
+import { deleteComment, editComment } from "../../modules/redux/comment";
 import { H3_BOLD, H3, H4_ERR } from "../styled/Hn";
 import Button from "../../elements/Button";
 
 // TODO 한번에 하나만 수정 가능하게?
+// TODO 이전 값 원형 복귀 안됨!
 const Comment = ({ id, nickname, content, isMine, postId }) => {
   const {
     register,
@@ -20,46 +23,7 @@ const Comment = ({ id, nickname, content, isMine, postId }) => {
   const [inEdit, setInEdit] = useState(false);
   const [editContent, setEditContent] = useState(content);
 
-  const deletePost = async () => {
-    // const { data: { result, status: { message } } } = await axios.delete(`http://localhost:3000/api/post/${postId}/${id}`, {
-    // 	headers: {
-    // 		Authorization: localStorage.getItem('AccessToken'),
-    // 		RefreshToken: localStorage.getItem('RefreshToken')
-    // 	}
-    // })
-
-    const {
-      result,
-      status: { message },
-    } = RESP.DELETE_COMMENT_SUCCESS;
-
-    if (!result) {
-      alert(message);
-      return;
-    }
-
-    // TODO delete 후처리
-  };
-
-  const editPost = async () => {
-    // const { data: { result, status: { message } } } = await axios.delete(`http://localhost:3000/api/post/${postId}/${id}`, {
-    // 	headers: {
-    // 		Authorization: localStorage.getItem('AccessToken'),
-    // 		RefreshToken: localStorage.getItem('RefreshToken')
-    // 	}
-    // })
-
-    const {
-      result,
-      status: { message },
-    } = RESP.EDIT_COMMENT_SUCCESS;
-
-    if (!result) {
-      alert(message);
-      return;
-    }
-    // TODO edit 후처리 하기
-  };
+  const dispatch = useDispatch();
 
   const onEditHandler = () => {
     setInEdit(true);
@@ -94,6 +58,29 @@ const Comment = ({ id, nickname, content, isMine, postId }) => {
       alert(message);
       return;
     }
+
+    dispatch(editComment());
+  };
+
+  const deletePost = async () => {
+    // const { data: { result, status: { message } } } = await axios.delete(`http://localhost:3000/api/post/${postId}/${id}`, {
+    // 	headers: {
+    // 		Authorization: localStorage.getItem('AccessToken'),
+    // 		RefreshToken: localStorage.getItem('RefreshToken')
+    // 	}
+    // })
+
+    const {
+      result,
+      status: { message },
+    } = RESP.DELETE_COMMENT_SUCCESS;
+
+    if (!result) {
+      alert(message);
+      return;
+    }
+
+    dispatch(deleteComment());
   };
 
   const onDeleteHandler = () => {
@@ -103,8 +90,6 @@ const Comment = ({ id, nickname, content, isMine, postId }) => {
     }
     deletePost();
   };
-
-  console.log(editContent);
 
   return (
     <CommentWrapper>

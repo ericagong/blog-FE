@@ -6,7 +6,7 @@ import { H1 } from "../../components/styled/Hn";
 
 const My = (props) => {
   return (
-    <>
+    <Layout>
       <Wrapper>
         <Header />
         <TitleWrapper>
@@ -14,7 +14,7 @@ const My = (props) => {
         </TitleWrapper>
         <MyLayout />
       </Wrapper>
-    </>
+    </Layout>
   );
 };
 

@@ -1,4 +1,4 @@
-
+import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
@@ -8,7 +8,10 @@ import RESP from "../../server/response";
 
 import Comment from "./Comment";
 
+// TODO 무한 스크롤
 const Comments = (props) => {
+  const fetchWatcher = useSelector((state) => state.comment.fetchWatcher);
+
   const [comments, setComments] = useState([]);
 
   const { id } = useParams();
@@ -42,9 +45,9 @@ const Comments = (props) => {
     const commentsNum = 1;
     const pageLimit = 5;
     getComments(commentsNum, pageLimit);
-  }, []);
+  }, [fetchWatcher]);
 
-  console.log(comments);
+  // console.log(comments);
 
   const allComments = comments.map((comment) => (
     <Comment key={comment.id} {...comment} postId={id} />
