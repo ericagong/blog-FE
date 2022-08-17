@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import styled from "styled-components";
+import axios from "axios";
+import RESP from "../../server/response";
 
 import { Form } from "../styled/User";
 import Button from "../../elements/Button";
@@ -10,14 +13,34 @@ import { H4_ERR } from "../styled/Hn";
 const CommentsLayout = (props) => {
   const { id } = useParams();
 
+  // TODO react-hook-form reset
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({ mode: "onChange" });
 
-  const onSubmitHandler = (formData) => {
-    console.log(formData);
+  const onSubmitHandler = async (formData) => {
+    // console.log(formData);
+
+    // const { data: { result, status: { message } } } = await axios.post(`http://localhost:3000/api/post/${id}/comment`, formData, {
+    // 	headers: {
+    // 		Authorization: localStorage.getItem('AccessToken'),
+    // 		RefreshToken: localStorage.getItem('RefreshToken')
+    // 	}
+    // });
+
+    const {
+      result,
+      status: { message },
+    } = RESP.CREATE_COMMENT_SUCCESS;
+
+    if (!result) {
+      alert(message);
+      return;
+    }
+    reset({ content: "" });
   };
 
   return (
