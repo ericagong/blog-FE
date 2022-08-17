@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 import { H1 } from "../styled/Hn";
 import Login from "./Login";
+import SocialLogin from "./SocialLogin";
 
 const LoginLayout = (props) => {
   return (
@@ -13,6 +14,7 @@ const LoginLayout = (props) => {
         <Link to='/signup'>Go Sign up</Link>
       </TitleWrapper>
       <Login />
+      <SocialLogin />
     </Wrapper>
   );
 };
