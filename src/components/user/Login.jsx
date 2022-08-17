@@ -39,7 +39,6 @@ const Login = (props) => {
   const onSubmitHandler = async (formData) => {
     // console.log(formData);
 
-    const resp = await axios.post(`http://3.34.47.86/user/login`, formData);
     const {
       headers: { authorization, refreshtoken },
       data: {
@@ -47,7 +46,6 @@ const Login = (props) => {
         status: { message },
       },
     } = await axios.post(`http://3.34.47.86/user/login`, formData);
-    console.log(resp);
 
     // const {
     //   result,
@@ -60,9 +58,12 @@ const Login = (props) => {
       alert(message);
       return;
     }
+
     localStorage.setItem("AccessToken", authorization);
     localStorage.setItem("RefreshToken", refreshtoken);
+
     dispatch(login());
+
     navigate("/home");
   };
 
