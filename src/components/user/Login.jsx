@@ -39,7 +39,6 @@ const Login = (props) => {
   const onSubmitHandler = async (formData) => {
     // console.log(formData);
 
-    const resp = await axios.post(`http://3.34.47.86/user/login`, formData);
     const {
       headers: { authorization, refreshtoken },
       data: {
@@ -47,7 +46,6 @@ const Login = (props) => {
         status: { message },
       },
     } = await axios.post(`http://3.34.47.86/user/login`, formData);
-    console.log(resp);
 
     // const {
     //   result,
@@ -60,49 +58,54 @@ const Login = (props) => {
       alert(message);
       return;
     }
+
     localStorage.setItem("AccessToken", authorization);
     localStorage.setItem("RefreshToken", refreshtoken);
+
     dispatch(login());
+
     navigate("/home");
   };
 
   return (
     <Form onSubmit={handleSubmit(onSubmitHandler)}>
-      <H3 as='label' htmlFor='username'>
-        ID
-      </H3>
-      <InputWrapper>
-        <Input
-          {...register("username", {
-            required: "You should write ID for login.",
-          })}
-          type='text'
-          onChange={onChangeHandler}
-        />
-      </InputWrapper>
-      {errors?.username ? (
-        <ErrorWrapper>
-          <H4_ERR>{errors.username.message}</H4_ERR>
-        </ErrorWrapper>
-      ) : null}
-      <H3 as='label' htmlFor='password'>
-        Password
-      </H3>
-      <InputWrapper>
-        <Input
-          {...register("password", {
-            required: "You should write password for login.",
-          })}
-          type='password'
-          id='password'
-          onChange={onChangeHandler}
-        />
-      </InputWrapper>
-      {errors?.password ? (
-        <ErrorWrapper>
-          <H4_ERR>{errors.password.message}</H4_ERR>
-        </ErrorWrapper>
-      ) : null}
+      <FormWrapper>
+        <H3 as='label' htmlFor='username'>
+          ID
+        </H3>
+        <InputWrapper>
+          <Input
+            {...register("username", {
+              required: "You should write ID for login.",
+            })}
+            type='text'
+            onChange={onChangeHandler}
+          />
+        </InputWrapper>
+        {errors?.username ? (
+          <ErrorWrapper>
+            <H4_ERR>{errors.username.message}</H4_ERR>
+          </ErrorWrapper>
+        ) : null}
+        <H3 as='label' htmlFor='password'>
+          Password
+        </H3>
+        <InputWrapper>
+          <Input
+            {...register("password", {
+              required: "You should write password for login.",
+            })}
+            type='password'
+            id='password'
+            onChange={onChangeHandler}
+          />
+        </InputWrapper>
+        {errors?.password ? (
+          <ErrorWrapper>
+            <H4_ERR>{errors.password.message}</H4_ERR>
+          </ErrorWrapper>
+        ) : null}
+      </FormWrapper>
       <Button type='submit' size='lg' content='Login' />
     </Form>
   );
@@ -122,12 +125,14 @@ const Form = styled.form`
   padding-left: 10%;
 `;
 
-const InputWrapper = styled.div`
+const FormWrapper = styled.div`
   display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  flex-direction: column;
+  margin-bottom: 10px;
+`;
+
+const InputWrapper = styled.div`
   box-sizing: border-box;
   padding: 5px 0px;
 `;

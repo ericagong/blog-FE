@@ -11,11 +11,12 @@ function MyLayout(props) {
   const [posts, setPosts] = useState([]);
   const [numPosts, setNumPosts] = useState(0);
   const [numComments, setNumComments] = useState(0);
-  
+
+
   console.log(posts);
-  
+
   const navigate = useNavigate();
-  
+
   const getPosts = async (pageNum, pageLimit) => {
 
     //     const {
@@ -38,15 +39,18 @@ function MyLayout(props) {
       data: { posts, numComments, numPosts },
       status: { message },
     } = RESP.MY_SUCCESS;
+
     if (!result) {
       alert(message);
       navigate("/home");
       return;
     }
+
     setPosts(posts);
     setNumComments(numComments);
     setNumPosts(numPosts);
   };
+
   useEffect(() => {
     getPosts(1, 5);
   }, []);
@@ -61,6 +65,7 @@ function MyLayout(props) {
       <H3_BOLD>My Comments : {numComments}</H3_BOLD>
       {myPosts}
       </Wrapper> 
+
     </>
   );
 }
@@ -76,7 +81,10 @@ const Wrapper = styled.div`
   overflow: scroll;
 `;
 
+
 const TitleWrapper = styled.div`
   box-sizing: border-box;
   padding-bottom: 30px;
 `;
+
+
