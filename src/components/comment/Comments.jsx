@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams, useNavgate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
 import axios from "axios";
