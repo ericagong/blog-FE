@@ -12,7 +12,7 @@ const My = (props) => {
         <TitleWrapper>
           <H1>My Page</H1>
         </TitleWrapper>
-       <MyLayout/>
+        <MyLayout />
       </Wrapper>
     </>
   );

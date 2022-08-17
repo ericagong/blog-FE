@@ -1,25 +1,28 @@
-import axios from 'axios';
-import React, { useState, useEffect} from 'react'
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 import { H1 } from "../styled/Hn";
 import { H3_BOLD } from "../styled/Hn";
 import RESP from "../../server/response";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import Post from "../post/Post";
 
 function MyLayout(props) {
-    const [post, setPost] = useState([]);
-    console.log(post)
+  const [posts, setPosts] = useState([]);
+  const [numPosts, setNumPosts] = useState(0);
+  const [numComments, setNumComments] = useState(0);
 
-    const navigate = useNavigate()
+  console.log(posts);
 
-    const getPost = async (pageNum,pageLimit) => {
+  const navigate = useNavigate();
+
+  const getPosts = async (pageNum, pageLimit) => {
     //     const {
     //         data : {
     //             result,
     //             data,
     //             status : { message },
     //         },
-    //     } = await axios.get(`http://localhost:3000/api/my`, 
+    //     } = await axios.get(`http://localhost:3000/api/my`,
     //     {
     //         headers: {
     //             Authorization: localStorage.getItem("AccessToken"),
@@ -28,37 +31,37 @@ function MyLayout(props) {
     //     }
     // )
 
-        const {
-        result,
-        data,
-        status : { message },
-        } = RESP.MY_SUCCESS
+    const {
+      result,
+      data: { posts, numComments, numPosts },
+      status: { message },
+    } = RESP.MY_SUCCESS;
 
-
-        if (!result) {
-        alert(message)
-        navigate("/home");
-        return
-        }
-        setPost(data)
-
+    if (!result) {
+      alert(message);
+      navigate("/home");
+      return;
     }
 
-    useEffect (() => {
-        getPost(1,5)
-    },[])
+    setPosts(posts);
+    setNumComments(numComments);
+    setNumPosts(numPosts);
+  };
 
-  const myPosts = post.map((props) => <div key={props.posts.id} {...props} />)
+  useEffect(() => {
+    getPosts(1, 5);
+  }, []);
 
+  const myPosts = posts.map((post) => <div key={post.id} {...post} />);
 
   return (
-   <> 
-    <H1>나의 활동 내역</H1>
-    <H3_BOLD>내가 작성한 게시글 : {post.numPosts}</H3_BOLD>
-    <H3_BOLD>내가 작성한 댓글 : {post.numComments}</H3_BOLD>
-    {myPosts}
-   </> 
-  )
+    <>
+      <H1>나의 활동 내역</H1>
+      <H3_BOLD>내가 작성한 게시글 : {numPosts}</H3_BOLD>
+      <H3_BOLD>내가 작성한 댓글 : {numComments}</H3_BOLD>
+      {myPosts}
+    </>
+  );
 }
 
-export default MyLayout
+export default MyLayout;
