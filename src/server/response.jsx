@@ -103,8 +103,8 @@ const RESP = {
   MY_SUCCESS: {
     result: true,
     data: {
-      postsNum: 5,
-      commentsNum: 10,
+      numPosts: 5,
+      numComments: 10,
       posts: [
         {
           id: 1,

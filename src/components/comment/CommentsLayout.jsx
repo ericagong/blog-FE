@@ -1,6 +1,6 @@
-import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
 
 import styled from "styled-components";
 import axios from "axios";
@@ -20,6 +20,8 @@ const CommentsLayout = (props) => {
     reset,
     formState: { errors },
   } = useForm({ mode: "onChange" });
+
+  const isLogin = useSelector((state) => state.user.isLogin);
 
   const onSubmitHandler = async (formData) => {
     // console.log(formData);
@@ -45,29 +47,31 @@ const CommentsLayout = (props) => {
 
   return (
     <>
-      <Form onSubmit={handleSubmit(onSubmitHandler)}>
-        <InputWrapper>
-          <Input
-            {...register("content", {
-              required: "You should write content to create comment.",
-              validate: {
-                notEmpty: (v) =>
-                  v.replace(/\s+/g, "") !== "" ||
-                  "You should write content to create comment.",
-              },
-            })}
-            type='text'
-            id='content'
-            placeholder='Write comment here...'
-          />
-          <Button type='submit' content='Create' />
-        </InputWrapper>
-        {errors?.content ? (
-          <ErrorWrapper>
-            <H4_ERR>{errors.content.message}</H4_ERR>
-          </ErrorWrapper>
-        ) : null}
-      </Form>
+      {isLogin ? (
+        <Form onSubmit={handleSubmit(onSubmitHandler)}>
+          <InputWrapper>
+            <Input
+              {...register("content", {
+                required: "You should write content to create comment.",
+                validate: {
+                  notEmpty: (v) =>
+                    v.replace(/\s+/g, "") !== "" ||
+                    "You should write content to create comment.",
+                },
+              })}
+              type='text'
+              id='content'
+              placeholder='Write comment here...'
+            />
+            <Button type='submit' content='Create' />
+          </InputWrapper>
+          {errors?.content ? (
+            <ErrorWrapper>
+              <H4_ERR>{errors.content.message}</H4_ERR>
+            </ErrorWrapper>
+          ) : null}
+        </Form>
+      ) : null}
     </>
   );
 };
