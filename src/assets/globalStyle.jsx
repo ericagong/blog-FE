@@ -8,8 +8,11 @@ export const lightTheme = {
   errorTextColor: "#FD2053",
   successTextColor: "#00BA00",
 
+  // divider
+  dividerColor: "#FFFFFF",
+
   // button
-  buttonColor: "#B7BBC7",
+  buttonColor: "#EFEFEF",
   buttonTextColor: "#17192C",
   buttonRadius: "10px",
   iconColor: "#B7BBC7",

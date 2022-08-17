@@ -3,13 +3,13 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
+import axios from "axios";
 
+// import RESP from "../../server/response";
 import { H3, H4, H4_ERR, H4_SUC } from "../styled/Hn";
 import Button from "../../elements/Button";
 
-import RESP from "../../server/response";
-import axios from "axios";
-
+// TODO check onchange option!
 const Signup = (props) => {
   const [userInfo, setUserInfo] = useState({
     username: "",
@@ -31,9 +31,7 @@ const Signup = (props) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    mode: "onChange",
-  });
+  } = useForm({ mode: "onChange" });
 
   const navigate = useNavigate();
 
@@ -122,7 +120,6 @@ const Signup = (props) => {
   };
 
   const submitHandler = async (formData) => {
-    console.log("submitted");
     // console.log(formData);
 
     const {
@@ -131,6 +128,7 @@ const Signup = (props) => {
         status: { message },
       },
     } = await axios.post(`http://3.34.47.86/user/signup`, formData);
+
     // const {
     //   result,
     //   status: { message },
@@ -150,6 +148,7 @@ const Signup = (props) => {
         </H3>
         <H4>Use 8 to 16 characters with a mix of letters, numbers.</H4>
       </HelperWrapper>
+
       <InputWrapper>
         <Input
           type='text'
@@ -173,12 +172,18 @@ const Signup = (props) => {
           content='check'
           onClick={checkusernameHandler}
         />
+
         {check.username ? (
-          <H4_SUC>{check.usernameMsg}</H4_SUC>
+          <MessageWrapper>
+            <H4_SUC>{check.usernameMsg}</H4_SUC>
+          </MessageWrapper>
         ) : (
-          <H4_ERR>{check.usernameMsg}</H4_ERR>
+          <MessageWrapper>
+            <H4_ERR>{check.usernameMsg}</H4_ERR>
+          </MessageWrapper>
         )}
       </InputWrapper>
+
       {errors?.username && (
         <ErrorWrapper>
           <H4_ERR>{errors.username.message}</H4_ERR>
@@ -194,6 +199,7 @@ const Signup = (props) => {
           numbers.
         </H4>
       </HelperWrapper>
+
       <InputWrapper>
         <Input
           type='text'
@@ -217,10 +223,15 @@ const Signup = (props) => {
           content='check'
           onClick={checkNickHandler}
         />
+
         {check.nickname ? (
-          <H4_SUC>{check.nicknameMsg}</H4_SUC>
+          <MessageWrapper>
+            <H4_SUC>{check.nicknameMsg}</H4_SUC>
+          </MessageWrapper>
         ) : (
-          <H4_ERR>{check.nicknameMsg}</H4_ERR>
+          <MessageWrapper>
+            <H4_ERR>{check.nicknameMsg}</H4_ERR>
+          </MessageWrapper>
         )}
       </InputWrapper>
 
@@ -239,6 +250,7 @@ const Signup = (props) => {
           characters(!@#$%^&*()?_~).
         </H4>
       </HelperWrapper>
+
       <InputWrapper>
         <Input
           type='password'
@@ -267,17 +279,20 @@ const Signup = (props) => {
           onChange={changeHandler}
         />
       </InputWrapper>
+
       {errors?.password && (
         <ErrorWrapper>
           <H4_ERR>{errors.password.message}</H4_ERR>
         </ErrorWrapper>
       )}
+
       <HelperWrapper>
         <H3 as='label' htmlFor='password check'>
           Password Check
         </H3>
         <H4>Use 8 to 16 characters with a mix of letters, numbers.</H4>
       </HelperWrapper>
+
       <InputWrapper>
         <Input
           type='password'
@@ -290,12 +305,18 @@ const Signup = (props) => {
           content='check'
           onClick={checkPWandler}
         />
+
         {check.password ? (
-          <H4_SUC>{check.passwordMsg}</H4_SUC>
+          <MessageWrapper>
+            <H4_SUC>{check.passwordMsg}</H4_SUC>
+          </MessageWrapper>
         ) : (
-          <H4_ERR>{check.passwordMsg}</H4_ERR>
+          <MessageWrapper>
+            <H4_ERR>{check.passwordMsg}</H4_ERR>
+          </MessageWrapper>
         )}
       </InputWrapper>
+
       <ButtonWrapper>
         <Button
           type='submit'
@@ -342,6 +363,10 @@ const InputWrapper = styled.div`
   padding: 5px 0px;
 `;
 
+const MessageWrapper = styled.div`
+  margin-left: 10px;
+`;
+
 const ErrorWrapper = styled.div`
   box-sizing: border-box;
   padding: 0px 0px 20px;
@@ -349,5 +374,5 @@ const ErrorWrapper = styled.div`
 
 const ButtonWrapper = styled.div`
   box-sizing: border-box;
-  padding: 10px;
+  padding: 10px 0px;
 `;

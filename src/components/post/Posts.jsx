@@ -52,7 +52,7 @@ const Posts = (props) => {
   }, []);
 
   // console.log(posts);
-  const allPosts = posts.map((props) => <Post key={props.id} {...props} />);
+  const allPosts = posts.map((post) => <Post key={post.id} {...post} />);
 
   return <>{allPosts}</>;
 };

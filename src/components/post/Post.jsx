@@ -6,7 +6,6 @@ import { H3, H5, H5_EFF } from "../styled/Hn";
 import ImageView from "../post/ImageView";
 import Button from "../../elements/Button";
 
-// TODO : 요약 추가?
 const Post = ({
   id,
   nickname,

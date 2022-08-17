@@ -40,9 +40,8 @@ const Btn = styled.button.attrs((props) => ({
     props.size === "sm"
       ? "5px 10px"
       : props.size === "lg"
-      ? "10px 110px"
+      ? "10px 100px"
       : "10px 20px"};
-  margin: 5px;
   border-radius: ${(props) => props.theme.buttonRadius};
   transition: ${(props) => props.theme.transition};
   border: none;

@@ -12,6 +12,7 @@ const My = (props) => {
        <MyLayout/>
       </Layout>
     </>
+
   );
 };
 
