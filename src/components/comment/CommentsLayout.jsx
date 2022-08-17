@@ -9,6 +9,7 @@ import RESP from "../../server/response";
 import { Form } from "../styled/User";
 import Button from "../../elements/Button";
 import { H4_ERR } from "../styled/Hn";
+import Comments from "../comment/Comments";
 
 const CommentsLayout = (props) => {
   const { id } = useParams();
@@ -72,6 +73,7 @@ const CommentsLayout = (props) => {
           ) : null}
         </Form>
       ) : null}
+      <Comments />
     </>
   );
 };
