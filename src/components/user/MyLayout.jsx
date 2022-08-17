@@ -19,26 +19,27 @@ function MyLayout(props) {
 
   const getPosts = async (pageNum, pageLimit) => {
 
-    //     const {
-    //         data : {
-    //             result,
-    //             data,
-    //             status : { message },
-    //         },
-    //     } = await axios.get(`http://localhost:3000/api/my`,
-    //     {
-    //         headers: {
-    //             Authorization: localStorage.getItem(“AccessToken”),
-    //             RefreshToken: localStorage.getItem(“RefreshToken”),
-    //         }
-    //     }
-    // )
+        const {
+            data : {
+                result,
+                data,
+                status : { message },
+            },
+        } = await axios.get(`http://3.34.47.86/api/my`,
+        {
+            headers: {
+                Authorization: localStorage.getItem("AccessToken"),
+                RefreshToken: localStorage.getItem("RefreshToken"),
+            }
+        }
+    )
+        
+    // const {
+    //   result,
+    //   data: { posts, numComments, numPosts },
+    //   status: { message },
+    // } = RESP.MY_SUCCESS;
 
-    const {
-      result,
-      data: { posts, numComments, numPosts },
-      status: { message },
-    } = RESP.MY_SUCCESS;
 
     if (!result) {
       alert(message);
@@ -46,9 +47,10 @@ function MyLayout(props) {
       return;
     }
 
-    setPosts(posts);
-    setNumComments(numComments);
-    setNumPosts(numPosts);
+    setPosts(data.posts);
+    setNumComments(data.numComments);
+    setNumPosts(data.numPosts);
+
   };
 
   useEffect(() => {
