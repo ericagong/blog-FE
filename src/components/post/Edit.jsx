@@ -10,7 +10,7 @@ import ImageView from "./ImageView";
 import Button from "../../elements/Button";
 
 import RESP from "../../server/response";
-// import axios from "axios";
+import axios from "axios";
 
 // TODO input type='file' css customizing
 // TODO loading spinner 적용
@@ -31,26 +31,38 @@ const Edit = (props) => {
     isMine: "",
   });
 
-  const { id } = useParams;
+  const { id } = useParams();
 
   const navigate = useNavigate();
 
-  // TODO 에러시 홈으로 갈지?
-  // TODO react-hook-form check!
   const getPost = async () => {
-    // const { result, data } = await axios.get(`http://localhost:3000/api/post/${id}`, {
-    // 	headers: {
-    // 		'Authorization': localStorage.getItem('AccessToken'),
-    // 		'RefreshToken': localStorage.getItem('RefreshToken')
-    // 	}
-    // });
-    const { result, data } = RESP.GET_POST_SUCCESS;
+    const resp = await axios.get(`http://3.34.47.86/api/post/${id}`, {
+      headers: {
+        Authorization: localStorage.getItem("AccessToken"),
+        RefreshToken: localStorage.getItem("RefreshToken"),
+      },
+    });
+
+    const {
+      result,
+      data,
+      status: { message },
+    } = resp.data;
+
+    // const { result, data } = RESP.GET_POST_SUCCESS;
+
     if (!result) {
+      alert(message);
       navigate("/home");
       return;
     }
+
+    console.log(data);
+
     setPost({ ...post, ...data });
   };
+
+  // console.log(post);
 
   useEffect(() => {
     getPost();
@@ -66,30 +78,35 @@ const Edit = (props) => {
     navigate(-1);
   };
 
-  const onSubmitHandler = (formData) => {
-    // console.log(formData);
+  const onSubmitHandler = async (formData) => {
     const { title, content } = formData;
 
     const editPost = {
       title,
       content,
-      imageUrl: post?.urls,
+      imageUrl: post.imageUrl,
     };
 
-    // const {
-    //   result,
-    //   status: { message },
-    // } = axios.post(`http://localhost:3000/api/post/${id}`, editPost, {
-    //   headers: {
-    //     'Authorization': localStorage.getItem("AccessToken"),
-    //     'RefreshToken': localStorage.getItem("RefreshToken"),
-    //   },
-    // });
+    console.log(editPost);
+
+    const resp = await axios.put(`http://3.34.47.86/api/post/${id}`, editPost, {
+      headers: {
+        Authorization: localStorage.getItem("AccessToken"),
+        RefreshToken: localStorage.getItem("RefreshToken"),
+      },
+    });
+
+    console.log(resp);
 
     const {
       result,
       status: { message },
-    } = RESP.EDIT_POST_SUCCESS;
+    } = resp.data;
+
+    // const {
+    //   result,
+    //   status: { message },
+    // } = RESP.EDIT_POST_SUCCESS;
 
     if (!result) {
       alert(message);

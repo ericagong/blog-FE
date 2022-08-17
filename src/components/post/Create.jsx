@@ -10,7 +10,7 @@ import ImageView from "./ImageView";
 import Button from "../../elements/Button";
 
 import RESP from "../../server/response";
-// import axios from "axios";
+import axios from "axios";
 
 // TODO input type='file' css customizing
 // TODO loading spinner 적용
@@ -30,17 +30,14 @@ const Create = (props) => {
   // https://jamong-icetea.tistory.com/243
   const onChangeHandler = async (e) => {
     const fileList = e.target.files;
+
     const formData = new FormData();
+
     for (let i = 0; i < fileList.length; i++) {
-      formData.append(i, fileList[i]);
+      formData.append("files", fileList[i]);
     }
 
-    console.log(fileList);
-    // for (let key of formData.entries()) {
-    //   console.log(`${key}`);
-    // }
-
-    setFiles([...fileList]);
+    setFiles([...formData]);
 
     if (!files) {
       setUrls("");
@@ -52,26 +49,24 @@ const Create = (props) => {
     // 	'content-type': 'multipart/form-data'
     // }
 
-    // TODO change to /api/image
-    // const resp = await axios.post(`http://3.34.47.86/api/image`, files, {
-    //   headers: {
-    //     Authorization: localStorage.getItem("AccessToken"),
-    //     RefreshToken: localStorage.getItem("RefreshToken"),
-    //     "Content-Type": "multipart/form-data",
-    //   },
-    // });
+    const {
+      data: { data },
+    } = await axios.post(`http://3.34.47.86/api/image`, formData, {
+      headers: {
+        Authorization: localStorage.getItem("AccessToken"),
+        RefreshToken: localStorage.getItem("RefreshToken"),
+        "Content-Type": "multipart/form-data",
+      },
+    });
 
-    // console.log(resp);
+    // console.log(data);
 
-    const { imageUrl } = RESP.UPLOAD_PHOTO_SUCCESS;
-    setUrls(imageUrl);
+    // const { imageUrl } = RESP.UPLOAD_PHOTO_SUCCESS;
+    setUrls(data);
   };
 
-  // console.log("files: ", files);
-  // console.log("urls: ", urls);
-
-  const onSubmitHandler = (formData) => {
-    console.log(formData);
+  const onSubmitHandler = async (formData) => {
+    // console.log(formData);
     const { title, content } = formData;
 
     const post = {
@@ -80,26 +75,22 @@ const Create = (props) => {
       imageUrl: urls,
     };
 
-    console.log(post);
-
-    // const {
-    //   data: {
-    //     result,
-    //     status: { message },
-    //   },
-    // } = axios.post(`http://3.34.47.86/api/post`, post, {
-    //   headers: {
-    //     Authorization: localStorage.getItem("AccessToken"),
-    //     RefreshToken: localStorage.getItem("RefreshToken"),
-    //   },
-    // });
-
-    // console.log(result, message);
-
     const {
-      result,
-      status: { message },
-    } = RESP.CREATE_POST_SUCCESS;
+      data: {
+        result,
+        status: { message },
+      },
+    } = await axios.post(`http://3.34.47.86/api/post`, post, {
+      headers: {
+        Authorization: localStorage.getItem("AccessToken"),
+        RefreshToken: localStorage.getItem("RefreshToken"),
+      },
+    });
+
+    // // const {
+    // //   result,
+    // //   status: { message },
+    // // } = RESP.CREATE_POST_SUCCESS;
 
     if (!result) {
       alert(message);
@@ -125,6 +116,7 @@ const Create = (props) => {
               required:
                 "You should select at least one image file to create new post.",
             })}
+            id='files'
             type='file'
             accept='image/jpg, image/png, image/jpeg'
             multiple

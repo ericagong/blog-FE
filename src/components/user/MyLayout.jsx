@@ -19,26 +19,19 @@ function MyLayout(props) {
 
   const getPosts = async (pageNum, pageLimit) => {
 
-        const {
-            data : {
-                result,
-                data,
-                status : { message },
-            },
-        } = await axios.get(`http://3.34.47.86/api/my`,
-        {
-            headers: {
-                Authorization: localStorage.getItem("AccessToken"),
-                RefreshToken: localStorage.getItem("RefreshToken"),
-            }
-        }
-    )
-        
-    // const {
-    //   result,
-    //   data: { posts, numComments, numPosts },
-    //   status: { message },
-    // } = RESP.MY_SUCCESS;
+    const {
+      data: {
+        result,
+        data,
+        status: { message },
+      },
+    } = await axios.get(`http://3.34.47.86/api/my`, {
+      headers: {
+        Authorization: localStorage.getItem("AccessToken"),
+        RefreshToken: localStorage.getItem("RefreshToken"),
+      },
+    });
+
 
 
     if (!result) {

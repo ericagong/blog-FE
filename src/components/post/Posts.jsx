@@ -12,31 +12,30 @@ const Posts = (props) => {
 
   const navigate = useNavigate();
 
-  // TODO API 문서 제발좀...
   const getPosts = async (pageNum, pageLimit) => {
-    // const {
-    //   data: {
-    //     result,
-    //     data,
-    //     status: { message },
-    //   },
-    // } = await axios.get(
-    //   `http://3.34.47.86/api/posts?pageNum=${pageNum}&pageLimit=${pageLimit}`,
-    //   {
-    //     headers: {
-    //       Authorization: localStorage.getItem("AccessToken"),
-    //       RefreshToken: localStorage.getItem("RefreshToken"),
-    //     },
-    //   }
-    // );
+    const {
+      data: {
+        result,
+        data,
+        status: { message },
+      },
+    } = await axios.get(
+      `http://3.34.47.86/api/posts?pageNum=${pageNum}&pageLimit=${pageLimit}`,
+      {
+        headers: {
+          Authorization: localStorage.getItem("AccessToken"),
+          RefreshToken: localStorage.getItem("RefreshToken"),
+        },
+      }
+    );
 
     // console.log(result, data);
 
-    const {
-      result,
-      data,
-      status: { message },
-    } = RESP.GET_POSTS_SUCCESS;
+    // const {
+    //   result,
+    //   data,
+    //   status: { message },
+    // } = RESP.GET_POSTS_SUCCESS;
 
     if (!result) {
       alert(message);
@@ -47,11 +46,12 @@ const Posts = (props) => {
     setPosts((state) => [...state, ...data]);
   };
 
+  console.log(posts);
+
   useEffect(() => {
-    getPosts(1, 5);
+    getPosts(0, 5);
   }, []);
 
-  // console.log(posts);
   const allPosts = posts.map((post) => <Post key={post.id} {...post} />);
 
   return <>{allPosts}</>;
