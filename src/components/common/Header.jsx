@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
+// import axios from "axios";
+import RESP from "../../server/response";
 
 import { logout } from "../../modules/redux/user";
 import { H2 } from "../styled/Hn";
@@ -10,21 +12,44 @@ import Button from "../../elements/Button";
 
 const Header = (props) => {
   const isLogin = useSelector((state) => state.user.isLogin);
+
   const dispatch = useDispatch();
+
   const navigate = useNavigate();
 
   const onClickHandler = (path) => {
     navigate(path);
   };
 
-  // TODO logout 서버 연결..
-  const logoutHandler = () => {
+  // TODO error!
+  const logoutHandler = async () => {
+    // const {
+    //   data: {
+    //     result,
+    //     status: { message },
+    //   },
+    // } = await axios.get(`http://3.34.47.86/user/logout`, {
+    //   headers: {
+    //     Authorization: localStorage.getItem("AccessToken"),
+    //     RefreshToken: localStorage.getItem("RefreshToken"),
+    //   },
+    // });
+
+    const {
+      result,
+      status: { message },
+    } = RESP.LOGOUT_SUCCESS;
+
+    if (!result) {
+      alert(message);
+      return;
+    }
+
     dispatch(logout());
     localStorage.removeItem("AccessToken");
     localStorage.removeItem("RefreshToken");
   };
 
-  // TODO 로그인 여부에 따라 분기처리
   return (
     <Navigator>
       <Container size='small'>

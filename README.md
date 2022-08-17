@@ -2,7 +2,7 @@
 
 ### Project
 
-TODO : 영상 교체하기
+TODO : 영상 교체하기!!
 ![TodoList Preview](https://user-images.githubusercontent.com/48196721/182003615-edcd0f87-bfae-4f4a-a649-59691da6dea7.gif)
 
 ### Tech Stack

@@ -6,15 +6,15 @@ import { H1 } from "../../components/styled/Hn";
 
 const My = (props) => {
   return (
-    <>
+    <Layout>
       <Wrapper>
         <Header />
         <TitleWrapper>
           <H1>My Page</H1>
         </TitleWrapper>
-       <MyLayout/>
+        <MyLayout />
       </Wrapper>
-    </>
+    </Layout>
   );
 };
 
