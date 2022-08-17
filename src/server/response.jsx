@@ -100,6 +100,97 @@ const RESP = {
       message: "sigin failed.",
     },
   },
+  MY_SUCCESS: {
+    result: true,
+    data: {
+      numPosts: 5,
+      numComments: 10,
+      posts: [
+        {
+          id: 1,
+          nickname: "Norina",
+          title: "Blood and Chocolate",
+          imageUrl: [
+            "https://user-images.githubusercontent.com/48196721/184591700-c3d418d5-d013-4659-b93b-b18fd45bb940.jpeg",
+            "https://user-images.githubusercontent.com/48196721/184771730-4acbc6a6-0b91-430b-8352-eea7617e7a41.jpeg",
+            "https://user-images.githubusercontent.com/48196721/184771766-ee26a6c5-cfa4-4b9e-a91e-6bfb695f4670.jpeg",
+          ],
+          content: "Curabitur in libero ut massa volutpat convallis.",
+          numComments: 1,
+          modifiedAt: "2020-04-09T19:12:30.686",
+        },
+        {
+          id: 2,
+          nickname: "Bonnee",
+          title: "Infernal Affairs 2 (Mou gaan dou II)",
+          imageUrl: [
+            "https://user-images.githubusercontent.com/48196721/184591700-c3d418d5-d013-4659-b93b-b18fd45bb940.jpeg",
+            "https://user-images.githubusercontent.com/48196721/184771730-4acbc6a6-0b91-430b-8352-eea7617e7a41.jpeg",
+            "https://user-images.githubusercontent.com/48196721/184771766-ee26a6c5-cfa4-4b9e-a91e-6bfb695f4670.jpeg",
+          ],
+          content: "Nulla tellus.",
+          numComments: 2,
+          modifiedAt: "2020-04-09T19:12:30.686",
+        },
+        {
+          id: 3,
+          nickname: "Raymond",
+          title: "My House in Umbria",
+          imageUrl: [
+            "https://user-images.githubusercontent.com/48196721/184591700-c3d418d5-d013-4659-b93b-b18fd45bb940.jpeg",
+            "https://user-images.githubusercontent.com/48196721/184771730-4acbc6a6-0b91-430b-8352-eea7617e7a41.jpeg",
+            "https://user-images.githubusercontent.com/48196721/184771766-ee26a6c5-cfa4-4b9e-a91e-6bfb695f4670.jpeg",
+          ],
+          content: "Curabitur convallis.",
+          numComments: 3,
+          modifiedAt: "2020-04-09T19:12:30.686",
+        },
+        {
+          id: 4,
+          nickname: "Nobe",
+          title: "Goodbye, Mr. Chips",
+          imageUrl: [
+            "https://user-images.githubusercontent.com/48196721/184591700-c3d418d5-d013-4659-b93b-b18fd45bb940.jpeg",
+            "https://user-images.githubusercontent.com/48196721/184771730-4acbc6a6-0b91-430b-8352-eea7617e7a41.jpeg",
+            "https://user-images.githubusercontent.com/48196721/184771766-ee26a6c5-cfa4-4b9e-a91e-6bfb695f4670.jpeg",
+          ],
+          content: "Pellentesque viverra pede ac diam.",
+          numComments: 4,
+          modifiedAt: "2020-04-09T19:12:30.686",
+        },
+        {
+          id: 5,
+          nickname: "Kathlin",
+          title: "Small Town Murder Songs",
+          imageUrl: [
+            "https://user-images.githubusercontent.com/48196721/184591700-c3d418d5-d013-4659-b93b-b18fd45bb940.jpeg",
+            "https://user-images.githubusercontent.com/48196721/184771730-4acbc6a6-0b91-430b-8352-eea7617e7a41.jpeg",
+            "https://user-images.githubusercontent.com/48196721/184771766-ee26a6c5-cfa4-4b9e-a91e-6bfb695f4670.jpeg",
+          ],
+          content:
+            "Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+          numComments: 5,
+          modifiedAt: "2020-04-09T19:12:30.686",
+        },
+      ],
+      status: {
+        code: 200,
+        message: "successfully load my page.",
+      },
+    },
+    status: {
+      code: 200,
+      message: "successfully signed in.",
+    },
+  },
+  MY_FAIL: {
+    result: false,
+    data: null,
+    status: {
+      code: 400,
+      message: "fail to load my page.",
+    },
+  },
 
   // for post realted APIs
   UPLOAD_PHOTO_SUCCESS: {
@@ -330,6 +421,8 @@ const RESP = {
       message: "failed to get post.",
     },
   },
+
+  // for comment realted APIs
   GET_COMMENTS_SUCCESS: {
     result: true,
     data: [
@@ -408,8 +501,51 @@ const RESP = {
       message: "failed to get comments.",
     },
   },
-
-  // for comment realted APIs
+  CREATE_COMMENT_SUCCESS: {
+    result: true,
+    data: {},
+    status: {
+      code: 200,
+      message: "successfully created comment.",
+    },
+  },
+  CREATE_COMMENT_FAIL: {
+    result: false,
+    status: {
+      code: 400,
+      message: "failed to create comment.",
+    },
+  },
+  EDIT_COMMENT_SUCCESS: {
+    result: true,
+    data: {},
+    status: {
+      code: 200,
+      message: "successfully edit comment.",
+    },
+  },
+  EDIT_COMMENT_FAIL: {
+    result: false,
+    status: {
+      code: 400,
+      message: "failed to edit comment.",
+    },
+  },
+  DELETE_COMMENT_SUCCESS: {
+    result: true,
+    data: {},
+    status: {
+      code: 200,
+      message: "successfully delete comment.",
+    },
+  },
+  DELETE_COMMENT_FAIL: {
+    result: false,
+    status: {
+      code: 400,
+      message: "failed to delete comment.",
+    },
+  },
 };
 
 export default RESP;

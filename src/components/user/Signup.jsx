@@ -10,9 +10,6 @@ import Button from "../../elements/Button";
 import RESP from "../../server/response";
 import axios from "axios";
 
-// TODO react-hook-form은 제출시에만 체크하므로, 유효성겁사 바로 안사라져서 불편함...
-// 차라리 onchangehandler에 유효성 검사 다는 편이 효율적일듯..
-
 const Signup = (props) => {
   const [userInfo, setUserInfo] = useState({
     username: "",
@@ -34,7 +31,9 @@ const Signup = (props) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    mode: "onChange",
+  });
 
   const navigate = useNavigate();
 
