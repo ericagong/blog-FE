@@ -1,9 +1,12 @@
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
 import axios from "axios";
 import RESP from "../../server/response";
+
+import Comment from "./Comment";
 
 const Comments = (props) => {
   const [comments, setComments] = useState([]);
@@ -12,9 +15,7 @@ const Comments = (props) => {
 
   const navigate = useNavigate();
 
-  const getComments = async () => {
-    // const commentsNum = 1
-    // const pageLimit = 5
+  const getComments = async (commentsNum, pageLimit) => {
     // const { data: { result, data, status: { message } } } = await axios.get(`http://localhost:3000/api/post/${id}/comments?commentsNum=${commentsNum}&pageLimit=${pageLimit}`,
     // 	{
     // 		headers: {
@@ -33,9 +34,30 @@ const Comments = (props) => {
       alert(message);
       navigate("/home");
     }
+
+    setComments([...comments, ...data]);
   };
 
-  return <></>;
+  useEffect(() => {
+    const commentsNum = 1;
+    const pageLimit = 5;
+    getComments(commentsNum, pageLimit);
+  }, []);
+
+  console.log(comments);
+
+  const allComments = comments.map((comment) => (
+    <Comment key={comment.id} {...comment} postId={id} />
+  ));
+
+  return <CommentsWrapper>{allComments}</CommentsWrapper>;
 };
 
 export default Comments;
+
+const CommentsWrapper = styled.div`
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+`;
