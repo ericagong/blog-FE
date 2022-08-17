@@ -6,7 +6,6 @@ import styled from "styled-components";
 import axios from "axios";
 import RESP from "../../server/response";
 
-import { Form } from "../styled/User";
 import Button from "../../elements/Button";
 import { H4_ERR } from "../styled/Hn";
 import Comments from "../comment/Comments";
@@ -79,6 +78,16 @@ const CommentsLayout = (props) => {
 };
 
 export default CommentsLayout;
+
+const Form = styled.form`
+  width: 70%;
+  height: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+`;
 
 const InputWrapper = styled.div`
   display: flex;

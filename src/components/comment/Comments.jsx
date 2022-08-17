@@ -46,7 +46,7 @@ const Comments = (props) => {
   console.log(comments);
 
   const allComments = comments.map((comment) => (
-    <Comment key={comment.id} {...comment} />
+    <Comment key={comment.id} {...comment} postId={id} />
   ));
 
   return <CommentsWrapper>{allComments}</CommentsWrapper>;
