@@ -12,11 +12,13 @@ function MyLayout(props) {
   const [numPosts, setNumPosts] = useState(0);
   const [numComments, setNumComments] = useState(0);
 
+
   console.log(posts);
 
   const navigate = useNavigate();
 
   const getPosts = async (pageNum, pageLimit) => {
+
     const {
       data: {
         result,
@@ -39,6 +41,7 @@ function MyLayout(props) {
     setPosts(data.posts);
     setNumComments(data.numComments);
     setNumPosts(data.numPosts);
+
   };
 
   useEffect(() => {
@@ -47,14 +50,15 @@ function MyLayout(props) {
   const myPosts = posts.map((post) => <Post key={post.id} {...post} />);
   return (
     <>
-      <Wrapper>
-        <TitleWrapper>
-          <H1>Activity History</H1>
-        </TitleWrapper>
-        <H3_BOLD>My Posts : {numPosts}</H3_BOLD>
-        <H3_BOLD>My Comments : {numComments}</H3_BOLD>
-        {myPosts}
-      </Wrapper>
+    <Wrapper>
+      <TitleWrapper>
+      <H1>Activity History</H1>
+      </TitleWrapper>
+      <H3_BOLD>My Posts : {numPosts}</H3_BOLD>
+      <H3_BOLD>My Comments : {numComments}</H3_BOLD>
+      {myPosts}
+      </Wrapper> 
+
     </>
   );
 }
@@ -69,7 +73,9 @@ const Wrapper = styled.div`
   overflow: scroll;
 `;
 
+
 const TitleWrapper = styled.div`
   box-sizing: border-box;
   padding-bottom: 30px;
 `;
+
