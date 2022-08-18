@@ -40,7 +40,8 @@ const Detail = (props) => {
     // const { result, data } = RESP.GET_POST_SUCCESS;
 
     if (!result) {
-      navigate("/home");
+      console.log(result);
+      // navigate("/home");
       return;
     }
 

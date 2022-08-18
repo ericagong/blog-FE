@@ -57,7 +57,7 @@ const Edit = (props) => {
       return;
     }
 
-    console.log(data);
+    // console.log(data);
 
     setPost({ ...post, ...data });
   };
@@ -96,22 +96,10 @@ const Edit = (props) => {
       },
     });
 
-    console.log(resp);
-
-    const {
-      result,
-      status: { message },
-    } = resp.data;
-
     // const {
     //   result,
     //   status: { message },
     // } = RESP.EDIT_POST_SUCCESS;
-
-    if (!result) {
-      alert(message);
-      return;
-    }
 
     navigate("/home");
   };

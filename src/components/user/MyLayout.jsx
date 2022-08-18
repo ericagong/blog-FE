@@ -32,8 +32,6 @@ function MyLayout(props) {
       },
     });
 
-
-
     if (!result) {
       alert(message);
       navigate("/home");
@@ -66,7 +64,6 @@ function MyLayout(props) {
 }
 export default MyLayout;
 
-
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -81,5 +78,4 @@ const TitleWrapper = styled.div`
   box-sizing: border-box;
   padding-bottom: 30px;
 `;
-
 
