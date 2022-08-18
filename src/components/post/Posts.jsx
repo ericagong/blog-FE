@@ -14,19 +14,19 @@ const Posts = (props) => {
   const target = useRef(null);
 
   useEffect(() => {
-    console.log("initial getPost");
+    // console.log("initial getPost");
     getPosts();
   }, []);
 
   const onIntersect = async (entries, observer) => {
     // 타겟 엘리멘트가 교차영역에 있고, loading중이 아닐때
     entries.forEach((entry) => {
-      console.log(entry);
-      console.log(observer);
+      // console.log(entry);
+      // console.log(observer);
       if (entry.isIntersecting) {
         getPosts(page);
       } else {
-        console.log("target is not intersecting!");
+        // console.log("target is not intersecting!");
       }
     });
   };
@@ -36,11 +36,11 @@ const Posts = (props) => {
     const observer = new IntersectionObserver(onIntersect, {
       threshold: 0.5,
     });
-    console.log(`Created observer to see: ${target.current}`);
+    // console.log(`Created observer to see: ${target.current}`);
     observer.observe(target.current);
     return () => {
       observer.disconnect();
-      console.log(`Observer disconnected`);
+      // console.log(`Observer disconnected`);
     };
   }, []);
 
@@ -84,7 +84,7 @@ const Posts = (props) => {
   return (
     <>
       {allPosts}
-      {!isLoading ? <Footer ref={target}>Footer</Footer> : null}
+      {!isLoading ? <Footer ref={target}></Footer> : null}
     </>
   );
 };
