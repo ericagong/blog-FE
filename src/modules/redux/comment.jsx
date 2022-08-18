@@ -8,6 +8,9 @@ const commentSlice = createSlice({
   name: "comment",
   initialState,
   reducers: {
+    createComment: (state, action) => {
+      state.fetchWatcher = !state.fetchWatcher;
+    },
     deleteComment: (state, action) => {
       state.fetchWatcher = !state.fetchWatcher;
     },
@@ -17,5 +20,6 @@ const commentSlice = createSlice({
   },
 });
 
-export const { deleteComment, editComment } = commentSlice.actions;
+export const { createComment, deleteComment, editComment } =
+  commentSlice.actions;
 export default commentSlice.reducer;

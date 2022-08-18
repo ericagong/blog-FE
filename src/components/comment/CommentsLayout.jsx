@@ -1,11 +1,11 @@
 import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import styled from "styled-components";
 import axios from "axios";
-import RESP from "../../server/response";
 
+import { createComment } from "../../modules/redux/comment";
 import Button from "../../elements/Button";
 import { H4_ERR } from "../styled/Hn";
 import Comments from "../comment/Comments";
@@ -23,8 +23,10 @@ const CommentsLayout = (props) => {
 
   const isLogin = useSelector((state) => state.user.isLogin);
 
+  const dispatch = useDispatch();
+
   const onSubmitHandler = async (formData) => {
-    console.log(formData);
+    // console.log(formData);
 
     const {
       data: {
@@ -47,6 +49,8 @@ const CommentsLayout = (props) => {
       alert(message);
       return;
     }
+
+    dispatch(createComment());
     reset({ content: "" });
   };
 
