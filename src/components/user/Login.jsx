@@ -36,6 +36,10 @@ const Login = (props) => {
     setUserInfo({ ...userInfo, [name]: value });
   };
 
+  const URI = {
+    BASE: process.env.REACT_APP_SERVER_URI,
+  };
+
   const onSubmitHandler = async (formData) => {
     // console.log(formData);
 
@@ -45,7 +49,7 @@ const Login = (props) => {
         result,
         status: { message },
       },
-    } = await axios.post(`http://3.34.47.86/user/login`, formData);
+    } = await axios.post(`${URI.BASE}/user/login`, formData);
 
     // const {
     //   result,
