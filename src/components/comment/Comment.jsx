@@ -68,6 +68,7 @@ const Comment = ({ id, nickname, content, isMine, postId }) => {
       return;
     }
 
+    setInEdit(false);
     dispatch(editComment());
   };
 
