@@ -177,8 +177,9 @@ const CommentWrapper = styled.div`
 
 // TODO min width? 넘침...
 const NicknameWrapper = styled.div`
-  width: 15%;
+  width: 35%;
   margin-left: 10px;
+	overflow: hidden;
 `;
 
 const ContentWrapper = styled.div`
