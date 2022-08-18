@@ -48,6 +48,8 @@ const Header = (props) => {
     dispatch(logout());
     localStorage.removeItem("AccessToken");
     localStorage.removeItem("RefreshToken");
+
+    navigate("/home");
   };
 
   return (

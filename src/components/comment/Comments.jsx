@@ -46,8 +46,6 @@ const Comments = (props) => {
     getComments(commentsNum, pageLimit);
   }, [fetchWatcher]);
 
-  console.log(comments);
-
   const allComments = comments.map((comment) => (
     <Comment key={comment.id} {...comment} postId={id} />
   ));
