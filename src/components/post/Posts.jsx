@@ -93,5 +93,4 @@ export default Posts;
 
 const Footer = styled.div`
   width: 100%;
-  background-color: tomato;
 `;
